@@ -1,101 +1,69 @@
-import Image from "next/image";
+import React from "react";
+import NavBar from "@/components/NavBar";
+import RegistrationForms from "@/components/Forms/RegistrationForms";
+import TextEffect from "@/components/Text-effect";
+import DynamicImage from "@/components/ui/dynamicImageLoading";
+import { Typography } from "@/lib/MtConfig";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    <div className="relative h-screen">
+      <div className="h-full overflow-y-auto md:mr-[40%] remove-scrollbar">
+        <NavBar />
+
+        <section className="remove-scrollbar mx-auto px-[7%] xl:px-[20%] mb-auto w-full">
+          <div className="flex-col w-full mt-24 gap-2 hidden sm:flex">
+            <Typography
+              variant="h1"
+              className="text-3xl xl:text-4xl dark:text-yellow-700 font-[Nunito] font-[700] text-deep-purple-400"
+              textGradient
+            >
+              Book Appointment
+            </Typography>
+            {/* Additional header content can go here */}
+          </div>
+
+          <div className="w-full relative z-[-1] mt-20 sm:hidden">
+            <DynamicImage
+              url="https://res.cloudinary.com/df71elqwr/image/upload/v1729162885/r9avzeotbvmlzvtqnnqr.png"
+              containerClass="inset-0 w-full h-full object-cover"
+              alt="Hero-Image"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+            <div className="absolute inset-0 flex flex-col justify-end overflow-hidden p-2">
+              <TextEffect
+                isVisible={true}
+                text="Book an Appointment"
+                effecContainerClass="flex justify-center items-center h-full"
+                effectClass="inline-block font-[Oswald] text-3xl italic font-[600] text-purple-100"
+              />
+            </div>
+          </div>
+
+          {/* Registration form and any other left-side content */}
+          <RegistrationForms />
+
+          <div className="dark:text-gray-400/50 mt-12 flex justify-between p-6 text-black/30">
+            <p>@2025 MoveCure</p>
+          </div>
+        </section>
+      </div>
+
+    <section className="hidden md:block fixed top-0 right-0 w-[40%] h-screen z-[-1]">
+        <DynamicImage
+          url="https://res.cloudinary.com/df71elqwr/image/upload/v1729163356/rzinecaoo5jkvorx1kbr.jpg"
+          containerClass="absolute inset-0 w-full h-full object-cover"
+          alt="Hero"
+        />
+
+        <div className="absolute inset-0 flex items-center justify-center">
+          <TextEffect
+            isVisible={true}
+            text="Empowering You to Move with Confidence"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
     </div>
   );
 }
