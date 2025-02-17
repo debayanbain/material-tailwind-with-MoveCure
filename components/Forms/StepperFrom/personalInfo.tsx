@@ -6,7 +6,7 @@ import {
 } from '@/lib/MtConfig';
 import InputCustomTheme from "@/components/custom-themes/InputCustomTheme";
 
-const RegistrationForms = () => {
+const PersonalInfo = () => {
     return (
         <>
             <form className="mt-8 mb-4 w-full lg:w-full">
@@ -48,12 +48,12 @@ const RegistrationForms = () => {
                         />
                     </InputCustomTheme>
                 </div>
-                <Button className="mt-14 font-[Nunito]" color='deep-purple' variant='gradient' loading={false} fullWidth>
+                {/* <Button className="mt-14 font-[Nunito]" color='deep-purple' variant='gradient' loading={false} fullWidth>
                     Book Now
-                </Button>
+                </Button> */}
             </form>
         </>
     )
 }
 
-export default RegistrationForms;
+export default PersonalInfo;

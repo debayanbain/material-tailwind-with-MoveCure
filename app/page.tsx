@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "@/components/NavBar";
-import RegistrationForms from "@/components/Forms/RegistrationForms";
+// import LoginPatient from "@/components/Forms/LoginPatient";
+import RegistrationPatient from "@/components/Forms/RegistrationPatient";
 import TextEffect from "@/components/Text-effect";
 import DynamicImage from "@/components/ui/dynamicImageLoading";
 import { Typography } from "@/lib/MtConfig";
@@ -42,7 +43,9 @@ export default function Home() {
           </div>
 
           {/* Registration form and any other left-side content */}
-          <RegistrationForms />
+          {/* <LoginPatient /> */}
+
+          <RegistrationPatient />
 
           <div className="dark:text-gray-400/50 mt-12 flex justify-between p-6 text-black/30">
             <p>@2025 MoveCure</p>
