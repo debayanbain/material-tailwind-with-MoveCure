@@ -1,16 +1,17 @@
 import React from 'react'
 import {
     Input,
-    Button,
     Typography,
 } from '@/lib/MtConfig';
 import InputCustomTheme from "@/components/custom-themes/InputCustomTheme";
+import { useFormContext } from "react-hook-form";
 
 const PersonalInfo = () => {
+    const { register, formState: { errors } } = useFormContext();
+
     return (
         <>
-            <form className="mt-8 mb-4 w-full lg:w-full">
-                <div className="mb-1 flex flex-col gap-6 static">
+                <div className="mb-1 flex flex-col gap-2 static">
                     <Typography variant="h6" className="-mb-3 font-[Nunito] text-dark-300/60 font-bold italic font-stretch-expanded dark:text-white/40">
                         Your Name
                     </Typography>
@@ -22,7 +23,13 @@ const PersonalInfo = () => {
                             labelProps={{
                                 className: "before:content-none after:content-none",
                             }}
+                            {...register("name")}
                         />
+                        {errors.name && (
+                            <Typography variant="small" className="text-red-500">
+                                {errors.name.message as string}
+                            </Typography>
+                        )}
                         <Typography variant="h6" className="-mb-3 font-[Nunito] text-dark-300/60 font-bold italic font-stretch-expanded dark:text-white/40">
                             Your Email
                         </Typography>
@@ -33,7 +40,13 @@ const PersonalInfo = () => {
                             labelProps={{
                                 className: "before:content-none after:content-none",
                             }}
+                            {...register("email")}
                         />
+                        {errors.email && (
+                            <Typography variant="small" className="text-red-500">
+                                {errors.email.message as string}
+                            </Typography>
+                        )}
                         <Typography variant="h6" className="-mb-3 font-[Nunito] text-dark-300/60 font-bold italic font-stretch-expanded dark:text-white/40">
                             Password
                         </Typography>
@@ -45,13 +58,15 @@ const PersonalInfo = () => {
                             labelProps={{
                                 className: "before:content-none after:content-none",
                             }}
+                            {...register("password")}
                         />
+                        {errors.password && (
+                            <Typography variant="small" className="text-red-500">
+                                {errors.password.message as string}
+                            </Typography>
+                        )}
                     </InputCustomTheme>
                 </div>
-                {/* <Button className="mt-14 font-[Nunito]" color='deep-purple' variant='gradient' loading={false} fullWidth>
-                    Book Now
-                </Button> */}
-            </form>
         </>
     )
 }
