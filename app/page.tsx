@@ -5,6 +5,7 @@ import RegistrationPatient from "@/components/Forms/RegistrationPatient";
 import TextEffect from "@/components/Text-effect";
 import DynamicImage from "@/components/ui/dynamicImageLoading";
 import { Typography } from "@/lib/MtConfig";
+import LottieAnimation from "@/components/Lottie-animation";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
             </Typography>
             {/* Additional header content can go here */}
           </div>
+
 
           <div className="w-full relative z-[-1] mt-20 sm:hidden">
             <DynamicImage
@@ -46,6 +48,8 @@ export default function Home() {
           {/* <LoginPatient /> */}
 
           <RegistrationPatient />
+          
+          <LottieAnimation />
 
           <div className="dark:text-gray-400/50 mt-12 flex justify-between p-6 text-black/30">
             <p>@2025 MoveCure</p>
@@ -53,7 +57,7 @@ export default function Home() {
         </section>
       </div>
 
-    <section className="hidden md:block fixed top-0 right-0 w-[40%] h-screen z-[-1]">
+      <section className="hidden md:block fixed top-0 right-0 w-[40%] h-screen z-[-1]">
         <DynamicImage
           url="https://res.cloudinary.com/df71elqwr/image/upload/v1729163356/rzinecaoo5jkvorx1kbr.jpg"
           containerClass="absolute inset-0 w-full h-full object-cover"

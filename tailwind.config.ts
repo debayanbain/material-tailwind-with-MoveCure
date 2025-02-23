@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import withMT from "@material-tailwind/react/utils/withMT"
+import tailwindAnimation from "tailwindcss-animate"
 // const withMT = require("@material-tailwind/react/utils/withMT");
 
 const config: Config = {
@@ -44,7 +45,7 @@ const config: Config = {
           500: "#FEB008",
         },
         violet: {
-          50:  '#6e44ff',
+          50: '#6e44ff',
           100: '#EDE9FE',
           200: '#DDD6FE',
           300: '#C4B5FD',
@@ -70,8 +71,29 @@ const config: Config = {
           950: '#301f56'
         }
       },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "2" },
+        },
+        "accordion-up": {
+          from: { height: "1" },
+          to: { height: "0" },
+        },
+        "ping-slow": {
+          "75%, 100%": {
+            transform: "scale(1.5)",
+            opacity: "0",
+          },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "ping-slow": "ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite",
+      },
     },
   },
-  plugins: [],
+  plugins: [tailwindAnimation],
 };
 export default withMT(config);
