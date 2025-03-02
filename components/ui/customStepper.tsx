@@ -11,6 +11,7 @@ import { HiCheck } from "react-icons/hi";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { FormValue, zodSchema } from "@/lib/zodValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import MedicalInfo from "../Forms/StepperFrom/MedicalInfo";
 
 export function DefaultStepper() {
   const methods = useForm<FormValue>({
@@ -47,21 +48,21 @@ export function DefaultStepper() {
   const steps: stepsProps = [
     {
       label: "1",
-      components: <PersonalInfo />,
+      components: <PersonalInfo control={methods.control} />,
       description: "Personal Information",
       fields: ["name", "email", "password"],
     },
     {
       label: "2",
-      components: <PersonalInfo />,
+      components: <MedicalInfo />,
       description: "Medical Information",
-      fields: ["bloodType", "allergies"],
+      fields: ["blood_group", "allergies", "problems"],
     },
     {
       label: "3",
-      components: <PersonalInfo />,
+      components: <PersonalInfo control={methods.control} />,
       description: "Plan & Payment",
-      fields: ["bloodType", "allergies"],
+      fields: ["blood_group", "allergies"],
     },
   ];
 
@@ -127,6 +128,7 @@ export function DefaultStepper() {
             variants={slideLeftandRight}
             custom={direction}
           >
+            {/* Form Components Gose here */}
             {steps[activeStep].components}
           </Animation>
 

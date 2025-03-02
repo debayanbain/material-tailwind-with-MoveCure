@@ -5,7 +5,7 @@ import RegistrationPatient from "@/components/Forms/RegistrationPatient";
 import TextEffect from "@/components/Text-effect";
 import DynamicImage from "@/components/ui/dynamicImageLoading";
 import { Typography } from "@/lib/MtConfig";
-import LottieAnimation from "@/components/Lottie-animation";
+import ScrollingButtom from "@/components/ScrollingButtom";
 
 export default function Home() {
   return (
@@ -49,7 +49,7 @@ export default function Home() {
 
           <RegistrationPatient />
           
-          <LottieAnimation />
+          <ScrollingButtom />
 
           <div className="dark:text-gray-400/50 mt-12 flex justify-between p-6 text-black/30">
             <p>@2025 MoveCure</p>
