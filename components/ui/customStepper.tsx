@@ -50,11 +50,11 @@ export function DefaultStepper() {
       label: "1",
       components: <PersonalInfo control={methods.control} />,
       description: "Personal Information",
-      fields: ["name", "email", "password"],
+      fields: ["patientName", "email", "phone_number"],
     },
     {
       label: "2",
-      components: <MedicalInfo />,
+      components: <MedicalInfo control={methods.control} />,
       description: "Medical Information",
       fields: ["blood_group", "allergies", "problems"],
     },
@@ -105,7 +105,7 @@ export function DefaultStepper() {
             isLastStep={(value) => setIsLastStep(value)}
             isFirstStep={(value) => setIsFirstStep(value)}
             activeLineClassName="dark:bg-yellow-500"
-            className="z-[-1] py-5"
+            className="z-[-1] py-5 mb-4"
           >
             {steps &&
               steps.map((steps, index) => (

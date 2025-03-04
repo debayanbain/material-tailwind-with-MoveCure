@@ -67,3 +67,18 @@ html {
   scroll-behavior: smooth;
   line-height: 0.5;
 }
+
+/* =====  REACT PHONE NUMBER INPUT OVERRIDES */
+.PhoneInputInput {
+  outline: none;
+  margin-left: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.PhoneInputInput::placeholder {
+  color: #cad0d3;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 1;
+}

@@ -5,9 +5,9 @@ import React from 'react';
 import { Control, ControllerRenderProps, FieldPath, FieldValues, Path } from "react-hook-form";
 
 type FormValues = {
-    name: string;
+    patientName: string;
     email: string;
-    password: string;
+    phone_number: string;
     blood_group: string;
     allergies: string;
     problems: string;

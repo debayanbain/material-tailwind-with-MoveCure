@@ -1,87 +1,38 @@
 import React from 'react'
-import {
-    Input,
-    Typography,
-    Textarea
-} from '@/lib/MtConfig';
-import InputCustomTheme from "@/components/custom-themes/InputCustomTheme";
-import { useFormContext } from "react-hook-form";
-import { cn } from '@/lib/utils';
+import { CustomFormFields } from '@/components/customForms';
+import { FromFiledTypes } from '@/Types/componentsTypes';
+import { customFormsTypes } from '@/Types/componentsTypes';
+import { FormValue } from '@/lib/zodValidation';
 
-const MedicalInfo = () => {
-    const { register, formState: { errors } } = useFormContext();
+const MedicalInfo: React.FC<customFormsTypes<FormValue>> = ({ control })  => {
 
     return (
         <>
             <div className="mb-1 flex flex-col gap-2 static">
-                <InputCustomTheme>
-                    <div className='w-full flex justify-center flex-col mt-4'>
-                        <Typography variant="h6" className="font-[Nunito] text-dark-300/60 font-bold italic font-stretch-expanded dark:text-white/40">
-                            Blood Group
-                        </Typography>
-                        <Input
-                            size="lg"
-                            placeholder="eg: O+"
-                            className={cn("border-2 !border-blue-gray-200 focus:!border-gray-700",
-                                errors.blood_group && "!border-red-400"
-                            )}
-                            labelProps={{
-                                className: "before:content-none after:content-none",
-                            }}
-                            {...register("blood_group")}
-                        />
-                        {errors.blood_group && (
-                            <Typography variant="small" className="text-red-500">
-                                {errors.blood_group.message as string}
-                            </Typography>
-                        )}
-                    </div>
-
-                    <div className='w-full flex justify-center flex-col mt-4'>
-                        <Typography variant="h6" className="font-[Nunito] text-dark-300/60 font-bold italic font-stretch-expanded dark:text-white/40">
-                            Allergies
-                        </Typography>
-                        <Input
-                            size="lg"
-                            placeholder="ex: Food allergies or asthma"
-                            className={cn("!border-blue-gray-200 focus:!border-gray-900",
-                                errors.allergies && "!border-red-400"
-                            )}
-                            labelProps={{
-                                className: "before:content-none after:content-none",
-                            }}
-                            {...register("allergies")}
-                        />
-                        {errors.allergies && (
-                            <Typography variant="small" className="text-red-500">
-                                {errors.allergies.message as string}
-                            </Typography>
-                        )}
-                    </div>
-
-                    <div className='w-full flex justify-center flex-col mt-4'>
-                        <Typography variant="h6" className="font-[Nunito] text-dark-300/60 font-bold italic font-stretch-expanded dark:text-white/40">
-                            Tell us about your problem!
-                        </Typography>
-
-                        <Textarea
-                            size="lg"
-                            placeholder="ex: Food allergies or asthma"
-                            className={cn("!border-blue-gray-200 focus:!border-gray-900",
-                                errors.problems && "!border-red-400"
-                            )}
-                            labelProps={{
-                                className: "before:content-none after:content-none",
-                            }}
-                            {...register("problems")}
-                        />
-                        {errors.problems && (
-                            <Typography variant="small" className="text-red-500">
-                                {errors.problems.message as string}
-                            </Typography>
-                        )}
-                    </div>
-                </InputCustomTheme>
+            <CustomFormFields
+                    control={control}
+                    fieldsName={FromFiledTypes.INPUT}
+                    name="blood_group"
+                    lable='Enter Your Blood Group'
+                    lableVariant="h6"
+                    placeholder="eg: O-positive"
+                />
+            <CustomFormFields
+                    control={control}
+                    fieldsName={FromFiledTypes.INPUT}
+                    name="allergies"
+                    lable='Enter Your Allergies Name'
+                    lableVariant="h6"
+                    placeholder="eg: Food, Medicine"
+                />
+            <CustomFormFields
+                    control={control}
+                    fieldsName={FromFiledTypes.TEXTAREA}
+                    name="problems"
+                    lable='Describe Your Problems'
+                    lableVariant="h6"
+                    placeholder="eg: Having neck pain for 2 days"
+                />
             </div >
         </>
     )
