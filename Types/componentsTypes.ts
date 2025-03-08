@@ -35,13 +35,6 @@ export type FormContextType = {
     id: string
 }
 
-export type FormFieldContextValue<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = {
-  name: TName
-}
-
 export type FormLableType = React.HTMLAttributes<HTMLDivElement> & {
     variant?: TypographyProps["variant"],
     text: string,
@@ -59,6 +52,14 @@ export enum FromFiledTypes {
     RADIO = "radio",
 }
 
+export type FormFieldContextValue<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+> = {
+  name: TName;
+  fieldName: FromFiledTypes | undefined;
+}
+
 export interface customFormsTypes<T extends FieldValues = FormValue> {
     control: Control<T>,
     fieldsName?: FromFiledTypes,
@@ -73,4 +74,5 @@ export interface customFormsTypes<T extends FieldValues = FormValue> {
     children?: React.ReactNode,
     renderSkeleton?: (field: ControllerRenderProps) => React.ReactNode,
     iconComponents?: React.ReactNode
+    showValidIcon?: boolean
 }

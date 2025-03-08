@@ -70,6 +70,8 @@ html {
 
 /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
 .PhoneInputInput {
+  max-width: 70% !important;
+  background-color: transparent !important;
   outline: none;
   margin-left: 4px;
   font-size: 14px;
@@ -81,4 +83,8 @@ html {
   font-size: 16px;
   font-weight: 600;
   opacity: 1;
+}
+
+.dark .PhoneInputInput::placeholder {
+  color: #515151;
 }

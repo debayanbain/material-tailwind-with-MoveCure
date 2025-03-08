@@ -1,10 +1,9 @@
 "use client";
 
-import React, { createContext, useContext } from "react";
+import React, { createContext } from "react";
 import { cn } from "@/lib/utils";
 import {
     Controller,
-    useFormContext,
     ControllerRenderProps,
     FieldValues,
 } from "react-hook-form";
@@ -18,30 +17,29 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { Slot } from "@radix-ui/react-slot";
 import { FormValue } from "@/lib/zodValidation";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import useFromState from '@/lib/utils/hooks/FormControllerHook';
 
-const FormItemContext = createContext<FormFieldContextValue | null>(null);
-
-const useFromState = () => {
-    const itemContext = useContext(FormItemContext);
-    if (!itemContext)
-        throw new Error("useFromState must be used within a FormItems");
-    const { getFieldState, formState } = useFormContext();
-
-    const fieldState = getFieldState(itemContext.name, formState);
-    return { ...fieldState };
-};
+export const FormItemContext = createContext<FormFieldContextValue | null>(null);
 
 const FormController = ({ children }: { children: React.ReactNode }) => {
-    const { error } = useFromState();
+    const { error, fieldName } = useFromState();
 
     return (
-        <div className="w-full space-y-2">
+        <div className={cn("w-full space-y-2", FromFiledTypes.PHONE_INPUT === fieldName && "!relative")}>
+            {
+                FromFiledTypes.PHONE_INPUT === fieldName && (
+                    <div className="absolute top-[0.60rem] right-3">
+                        <IoMdCheckmarkCircleOutline size={25} color="green" />
+                    </div>
+                )
+            }
             <Slot
                 className={cn(
                     "border-2 px-3 py-[0.7rem] rounded-md transition-colors",
                     error
                         ? "!border-red-500 focus:!border-red-600"
-                        : "!border-gray-300 focus:!border-gray-700"
+                        : "!border-gray-300 focus:!border-gray-700",
                 )}
             >
                 {children}
@@ -75,13 +73,15 @@ const FormLable = ({ children }: { children?: React.ReactNode }) => {
 
 const FormItems = ({
     name,
+    fieldName,
     children,
 }: {
     name: string;
     children?: React.ReactNode;
+    fieldName?: FromFiledTypes;
 }) => {
     return (
-        <FormItemContext.Provider value={{ name }}>
+        <FormItemContext.Provider value={{ name, fieldName }}>
             <div className="w-full space-y-2">{children}</div>
         </FormItemContext.Provider>
     );
@@ -104,7 +104,7 @@ const RenderFields = ({
                         {...field}
                         size="lg"
                         placeholder={placeholder}
-                        className="!border-2 placeholder:text-blue-gray-300/50 placeholder:opacity-100 "
+                        className="!border-2 placeholder:text-blue-gray-300/50 placeholder:opacity-100 dark:text-white"
                         labelProps={{
                             className: "before:content-none after:content-none",
                         }}
@@ -161,7 +161,7 @@ export const CustomFormFields = <T extends FieldValues>(
             control={control}
             name={name!}
             render={({ field }) => (
-                <FormItems name={name!}>
+                <FormItems name={name!} fieldName={fieldsName!}>
                     {fieldsName !== FromFiledTypes.CHECKBOX && lable && (
                         <FormLable>{lable}</FormLable>
                     )}

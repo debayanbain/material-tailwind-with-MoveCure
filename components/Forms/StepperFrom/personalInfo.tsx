@@ -33,6 +33,7 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
                     lable='Enter Phone Number'
                     lableVariant="h6"
                     placeholder="eg. +91 1234567890"
+                    showValidIcon
                 />
             </div >
         </>

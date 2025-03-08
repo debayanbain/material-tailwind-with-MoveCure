@@ -14,7 +14,7 @@ export const zodSchema = z.object({
     allergies: z.string().min(3, { message: 'Allergies must be at least 3 characters long' })
     .max(20, { message: "Allergies does not exist of 20 character long" })
     .nonempty({ message: 'Allergies cannot be empty' }),
-    problems: z.string().optional(),
+    problems: z.string().nonempty({ message: 'problems cannot be empty' }),
 
 
     plan: z.string().optional(),
