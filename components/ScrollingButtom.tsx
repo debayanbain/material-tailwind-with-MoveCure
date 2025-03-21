@@ -16,7 +16,6 @@ export default function LottieAnimation() {
             },
             { threshold: 0.1 }
         );
-    console.log(observer);
     
         if (buttonElement) {
             observer.observe(buttonElement);

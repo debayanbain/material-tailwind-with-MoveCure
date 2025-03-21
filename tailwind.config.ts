@@ -69,6 +69,9 @@ const config: Config = {
           800: '#5d3b9c',
           900: '#4e3280',
           950: '#301f56'
+        },
+        dark_teal: {
+          800: "#015963"
         }
       },
       keyframes: {

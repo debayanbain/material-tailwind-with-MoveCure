@@ -88,3 +88,27 @@ html {
 .dark .PhoneInputInput::placeholder {
   color: #515151;
 }
+
+/* pulse animation in Stepper form */
+.pulse:before,
+.pulse:after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: #8a82fb;
+  opacity: 0.7;
+  z-index: -1;
+}
+.pulse:before{
+  animation: pulse 2s ease-out infinite;
+}
+.pulse:after{
+  animation: pulse 2s 1s ease-out infinite;
+}
+@keyframes pulse{
+  100%{
+      transform: scale(1.85);
+      opacity: 0;
+  }
+}

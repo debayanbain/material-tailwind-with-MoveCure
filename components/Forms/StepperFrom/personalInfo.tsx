@@ -15,7 +15,6 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
                     fieldsName={FromFiledTypes.INPUT}
                     name="patientName"
                     lable='Enter Your Name'
-                    lableVariant="h6"
                     placeholder="eg: Sayan Saha"
                 />
                 <CustomFormFields
@@ -23,7 +22,6 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
                     fieldsName={FromFiledTypes.INPUT}
                     name="email"
                     lable='Enter Valid Email'
-                    lableVariant="h6"
                     placeholder="eg. sayan@example.com"
                 />
                 <CustomFormFields
@@ -31,9 +29,8 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
                     fieldsName={FromFiledTypes.PHONE_INPUT}
                     name="phone_number"
                     lable='Enter Phone Number'
-                    lableVariant="h6"
                     placeholder="eg. +91 1234567890"
-                    showValidIcon
+                    showValidIcon={true}
                 />
             </div >
         </>

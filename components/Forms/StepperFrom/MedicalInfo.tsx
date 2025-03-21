@@ -14,7 +14,6 @@ const MedicalInfo: React.FC<customFormsTypes<FormValue>> = ({ control })  => {
                     fieldsName={FromFiledTypes.INPUT}
                     name="blood_group"
                     lable='Enter Your Blood Group'
-                    lableVariant="h6"
                     placeholder="eg: O-positive"
                 />
             <CustomFormFields
@@ -22,7 +21,6 @@ const MedicalInfo: React.FC<customFormsTypes<FormValue>> = ({ control })  => {
                     fieldsName={FromFiledTypes.INPUT}
                     name="allergies"
                     lable='Enter Your Allergies Name'
-                    lableVariant="h6"
                     placeholder="eg: Food, Medicine"
                 />
             <CustomFormFields
@@ -30,7 +28,6 @@ const MedicalInfo: React.FC<customFormsTypes<FormValue>> = ({ control })  => {
                     fieldsName={FromFiledTypes.TEXTAREA}
                     name="problems"
                     lable='Describe Your Problems'
-                    lableVariant="h6"
                     placeholder="eg: Having neck pain for 2 days"
                 />
             </div >

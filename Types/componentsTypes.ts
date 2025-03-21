@@ -1,4 +1,4 @@
-import { TypographyProps } from '@/lib/MtConfig';
+import { TypographyProps, ButtonProps } from '@/lib/MtConfig';
 import { FormValue } from '@/lib/zodValidation';
 import { type Variants } from "framer-motion";
 import React from 'react';
@@ -29,6 +29,18 @@ export interface TextEffectProps {
     children: React.ReactNode;
     componentsKey: number;
     className?: string
+}
+
+export interface previousButtonProps {
+    text: string,
+    handlePrevorNext: () => void,
+    Steps: boolean,
+    buttonClass?: string,
+    childrenClass?: string,
+    textClass?: string,
+    icons?: React.ReactElement,
+    buttonVariant?: ButtonProps["variant"],
+    buttonColor?: ButtonProps["color"],
 }
 
 export type FormContextType = {

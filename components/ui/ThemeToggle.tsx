@@ -16,15 +16,22 @@ import RadioCustomStyles from "../custom-themes/RadioCustomTheme";
 import { cn } from "@/lib/utils";
 
 interface ThemeToggleProps {
-    iconClass?: string,
-    iconsButtonClass?: string
+    iconClass?: string;
+    iconsButtonClass?: string;
 }
 
-export default function ThemeToggle({ iconClass, iconsButtonClass }: Readonly<ThemeToggleProps>) {
+export default function ThemeToggle({
+    iconClass,
+    iconsButtonClass,
+}: Readonly<ThemeToggleProps>) {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const themeOption = ["dark", "light", "system"] as const;
-    const themeLabels = { dark: 'Dark', light: 'Light', system: 'System' } as const;
+    const themeLabels = {
+        dark: "Dark",
+        light: "Light",
+        system: "System",
+    } as const;
 
     useEffect(() => {
         setMounted(true);
@@ -35,11 +42,21 @@ export default function ThemeToggle({ iconClass, iconsButtonClass }: Readonly<Th
     return (
         <Menu placement="left-start" lockScroll={true}>
             <MenuHandler>
-                <Button variant="outlined" size="sm" ripple={false} className={cn("rounded-full px-[7px] py-[7px] border-2",
-                    iconsButtonClass ? iconsButtonClass : "dark:border-gray-300/20"
-                )}>
-                    <CgDarkMode size={23} className={cn(iconClass ? iconClass : "dark:text-white")} />
+                <Button
+                    variant="outlined"
+                    size="sm"
+                    ripple={false}
+                    className={cn(
+                        "rounded-full px-[7px] py-[7px] border-2",
+                        iconsButtonClass ? iconsButtonClass : "dark:border-gray-300/20"
+                    )}
+                >
+                    <CgDarkMode
+                        size={23}
+                        className={cn(iconClass ? iconClass : "dark:text-white")}
+                    />
                 </Button>
+
             </MenuHandler>
             <MenuList className="min-w-[130px]">
                 {themeOption.map((item) => (
@@ -57,7 +74,6 @@ export default function ThemeToggle({ iconClass, iconsButtonClass }: Readonly<Th
                     </MenuItem>
                 ))}
             </MenuList>
-
         </Menu>
     );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Stepper, Step, Button } from "@/lib/MtConfig";
+import { Stepper, Step } from "@/lib/MtConfig";
 import PersonalInfo from "../Forms/StepperFrom/personalInfo";
 import { type Variants, motion, useAnimationControls } from "framer-motion";
 import { type stepsProps } from "@/Types/componentsTypes";
@@ -12,11 +12,24 @@ import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { FormValue, zodSchema } from "@/lib/zodValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MedicalInfo from "../Forms/StepperFrom/MedicalInfo";
+// import { FaArrowRightLong } from "react-icons/fa6";
+import GroupAnimationButton from "./GroupAnimationButton";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 export function DefaultStepper() {
   const methods = useForm<FormValue>({
     resolver: zodResolver(zodSchema),
     mode: "onBlur",
+    defaultValues: {
+      patientName: "",
+      email: "",
+      phone_number: "",
+      blood_group: "",
+      allergies: "",
+      problems: "",
+      plan: "",
+      paymentMethod: "",
+    },
   });
 
   const [activeStep, setActiveStep] = useState(0);
@@ -113,9 +126,8 @@ export function DefaultStepper() {
                   key={index}
                   onChange={() => setActiveStep(index)}
                   className={cn(
-                    "text-white bg-dark-300 border-2 transition duration-500 ease-in-out",
-                    activeStep === index &&
-                    "border-primary ring-4 ring-deep-purple-500 ring-opacity-20 dark:ring-yellow-500 dark:ring-opacity-20"
+                    "relative text-white bg-dark-300 border-2 transition duration-500 ease-in-out ring-4 ring-deep-purple-500 ring-opacity-20 dark:ring-yellow-500 dark:ring-opacity-20",
+                    activeStep === index && "pulse"
                   )}
                 >
                   {activeStep === index ? <HiCheck size={20} /> : steps.label}
@@ -132,7 +144,7 @@ export function DefaultStepper() {
             {steps[activeStep].components}
           </Animation>
 
-          <div className="mt-16 flex justify-between gap-1">
+          <div className="mt-16 flex justify-between items-center gap-1 max-h-14">
             {activeStep > 0 && (
               <motion.div
                 variants={prevVarients}
@@ -146,15 +158,13 @@ export function DefaultStepper() {
                 }}
                 layout
               >
-                <Button
-                  onClick={handlePrev}
-                  variant="gradient"
-                  color="deep-orange"
-                  fullWidth
-                  disabled={isFirstStep}
-                >
-                  Previous
-                </Button>
+                <GroupAnimationButton 
+                  text={"Previous"}
+                  handlePrevorNext={handlePrev}
+                  Steps={isFirstStep}
+                  icons={<FaArrowLeftLong  size={20} color="black" />}
+                  buttonColor={"deep-orange"}
+                />
               </motion.div>
             )}
 
@@ -168,15 +178,17 @@ export function DefaultStepper() {
               className="w-full"
               layout
             >
-              <Button
-                onClick={handleNext}
-                disabled={isLastStep}
-                color="deep-purple"
-                variant="gradient"
-                fullWidth
-              >
-                Next
-              </Button>
+               <GroupAnimationButton 
+                  text={"Continue"}
+                  handlePrevorNext={handleNext}
+                  Steps={isLastStep}
+                  icons={<FaArrowRightLong  size={20} color="black" />}
+                  buttonColor={"deep-purple"}
+                  buttonVariant={"gradient"}
+                  buttonClass="text-center w-full rounded-full h-12 relative group overflow-hidden py-3 px-3"
+                  childrenClass={"bg-white group-hover:w-[90px] rounded-full h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"}
+                  textClass={"hover:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:translate-x-0 duration-500 delay-150"}
+                />
             </motion.div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import RegistrationPatient from "@/components/Forms/RegistrationPatient";
 import TextEffect from "@/components/Text-effect";
 import DynamicImage from "@/components/ui/dynamicImageLoading";
 import { Typography } from "@/lib/MtConfig";
-import ScrollingButtom from "@/components/ScrollingButtom";
+// import ScrollingButtom from "@/components/ScrollingButtom";
 
 export default function Home() {
   return (
@@ -29,7 +29,7 @@ export default function Home() {
 
           <div className="w-full relative z-[-1] mt-20 sm:hidden">
             <DynamicImage
-              url="https://res.cloudinary.com/df71elqwr/image/upload/v1729162885/r9avzeotbvmlzvtqnnqr.png"
+              url="/images/Main photo.png"
               containerClass="inset-0 w-full h-full object-cover"
               alt="Hero-Image"
             />
@@ -49,7 +49,7 @@ export default function Home() {
 
           <RegistrationPatient />
           
-          <ScrollingButtom />
+          {/* <ScrollingButtom /> */}
 
           <div className="dark:text-gray-400/50 mt-12 flex justify-between p-6 text-black/30">
             <p>@2025 MoveCure</p>
@@ -59,7 +59,7 @@ export default function Home() {
 
       <section className="hidden md:block fixed top-0 right-0 w-[40%] h-screen z-[-1]">
         <DynamicImage
-          url="https://res.cloudinary.com/df71elqwr/image/upload/v1729163356/rzinecaoo5jkvorx1kbr.jpg"
+          url="/images/onbording-image.jpg"
           containerClass="absolute inset-0 w-full h-full object-cover"
           alt="Hero"
         />

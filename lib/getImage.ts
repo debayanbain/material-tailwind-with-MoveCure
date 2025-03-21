@@ -1,9 +1,7 @@
 import { getPlaiceholder } from 'plaiceholder'
+import fs from 'node:fs/promises';
 export async function getImage(src: string) {
-  const buffer = await fetch(src, { cache: 'no-store' }).then(async res =>
-    Buffer.from(await res.arrayBuffer())
-  )
-
+  const buffer = await fs.readFile(`public${src}`);
   const {
     metadata: { height, width },
     ...plaiceholder

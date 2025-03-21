@@ -7,7 +7,7 @@ import {
     ControllerRenderProps,
     FieldValues,
 } from "react-hook-form";
-import { Typography, Input, Textarea } from "@/lib/MtConfig";
+import { Typography, Input, Textarea, Tooltip } from "@/lib/MtConfig";
 import {
     customFormsTypes,
     FormFieldContextValue,
@@ -22,16 +22,27 @@ import useFromState from '@/lib/utils/hooks/FormControllerHook';
 
 export const FormItemContext = createContext<FormFieldContextValue | null>(null);
 
-const FormController = ({ children }: { children: React.ReactNode }) => {
+const FormController = ({ children, showValidIcon }: { children: React.ReactNode; showValidIcon?: boolean }) => {
     const { error, fieldName } = useFromState();
 
     return (
         <div className={cn("w-full space-y-2", FromFiledTypes.PHONE_INPUT === fieldName && "!relative")}>
             {
                 FromFiledTypes.PHONE_INPUT === fieldName && (
-                    <div className="absolute top-[0.60rem] right-3">
-                        <IoMdCheckmarkCircleOutline size={25} color="green" />
-                    </div>
+                    <Tooltip
+                        placement="top"
+                        content="Verified"
+                        animate={{
+                            mount: { scale: 1, y: 0 },
+                            unmount: { scale: 0, y: 25 },
+                        }}
+                    >
+                        <div className="absolute top-[0.60rem] right-3">
+                        {showValidIcon && (
+                            <IoMdCheckmarkCircleOutline size={25} color="green" />
+                        )}
+                        </div>
+                    </Tooltip>
                 )
             }
             <Slot
@@ -94,7 +105,7 @@ const RenderFields = ({
     field: ControllerRenderProps;
     props: customFormsTypes;
 }) => {
-    const { fieldsName, placeholder } = props;
+    const { fieldsName, placeholder, showValidIcon, ...otherProps } = props;
 
     switch (fieldsName) {
         case FromFiledTypes.INPUT:
@@ -108,14 +119,14 @@ const RenderFields = ({
                         labelProps={{
                             className: "before:content-none after:content-none",
                         }}
-                        {...props}
+                        {...otherProps}
                     />
                 </FormController>
             );
 
         case FromFiledTypes.PHONE_INPUT:
             return (
-                <FormController>
+                <FormController showValidIcon={showValidIcon}>
                     <PhoneInput
                         {...field}
                         placeholder={placeholder}
@@ -125,7 +136,7 @@ const RenderFields = ({
                         onChange={field.onChange}
                         className="input-phone w-full"
                         rules={{ required: true }}
-                        {...props}
+                        {...otherProps}
                     />
                 </FormController>
             );
@@ -141,7 +152,7 @@ const RenderFields = ({
                         labelProps={{
                             className: "before:content-none after:content-none",
                         }}
-                        {...props}
+                        {...otherProps}
                     />
                 </FormController>
             );
