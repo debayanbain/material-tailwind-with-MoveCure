@@ -15,6 +15,13 @@ body.dark {
   background-color: #131619;
 }
 
+@media (forced-colors: active) {
+  html {
+    background-color: Canvas;
+    color: CanvasText;
+  }
+}
+
 @layer base {
 
   /* Remove scrollbar */

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/lib/MtConfig";
 import { cn } from "@/lib/utils";
-import { previousButtonProps } from "@/Types/componentsTypes";
+import { type previousButtonProps } from "@/Types/componentsTypes";
 
 const GroupAnimationButton = ({
   text,

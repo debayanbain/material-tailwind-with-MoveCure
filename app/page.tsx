@@ -10,7 +10,7 @@ import { Typography } from "@/lib/MtConfig";
 export default function Home() {
   return (
 
-    <div className="relative h-screen">
+    <div className="relative h-screen forced-colors:bg-[Canvas]">
       <div className="h-full overflow-y-auto md:mr-[40%] remove-scrollbar">
         <NavBar />
 

@@ -186,8 +186,8 @@ export function DefaultStepper() {
                   buttonColor={"deep-purple"}
                   buttonVariant={"gradient"}
                   buttonClass="text-center w-full rounded-full h-12 relative group overflow-hidden py-3 px-3"
-                  childrenClass={"bg-white group-hover:w-[90px] rounded-full h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"}
-                  textClass={"hover:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:translate-x-0 duration-500 delay-150"}
+                  childrenClass={"bg-white group-focus:w-[90px] rounded-full h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"}
+                  textClass={"group-focus:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:group-hover:translate-x-[-10px] duration-500 delay-200"}
                 />
             </motion.div>
           </div>
