@@ -7,7 +7,7 @@ import {
     ControllerRenderProps,
     FieldValues,
 } from "react-hook-form";
-import { Typography, Input, Textarea, Tooltip } from "@/lib/MtConfig";
+import { Typography, Input, Textarea, Tooltip, Radio } from "@/lib/MtConfig";
 import {
     customFormsTypes,
     FormFieldContextValue,
@@ -17,8 +17,11 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { Slot } from "@radix-ui/react-slot";
 import { FormValue } from "@/lib/zodValidation";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { IoIosCheckmarkCircle, IoMdCheckmarkCircleOutline } from "react-icons/io";
 import useFromState from '@/lib/utils/hooks/FormControllerHook';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import RadioCustomStyles from "./custom-themes/RadioCustomTheme";
 
 export const FormItemContext = createContext<FormFieldContextValue | null>(null);
 
@@ -38,9 +41,9 @@ const FormController = ({ children, showValidIcon }: { children: React.ReactNode
                         }}
                     >
                         <div className="absolute top-[0.60rem] right-3">
-                        {showValidIcon && (
-                            <IoMdCheckmarkCircleOutline size={25} color="green" />
-                        )}
+                            {showValidIcon && (
+                                <IoMdCheckmarkCircleOutline size={25} color="green" />
+                            )}
                         </div>
                     </Tooltip>
                 )
@@ -105,7 +108,7 @@ const RenderFields = ({
     field: ControllerRenderProps;
     props: customFormsTypes;
 }) => {
-    const { fieldsName, placeholder, showValidIcon, ...otherProps } = props;
+    const { fieldsName, placeholder, showValidIcon, radioItems, ...otherProps } = props;
 
     switch (fieldsName) {
         case FromFiledTypes.INPUT:
@@ -157,6 +160,45 @@ const RenderFields = ({
                 </FormController>
             );
 
+        case FromFiledTypes.DATEPICKER:
+            return (
+                <FormController>
+                    <DatePicker
+                        {...field}
+                        selected={field.value}
+                        onChange={(date) => field.onChange(date)}
+                        dateFormat={'dd/MM/yyyy'}
+                        showTimeSelect={false}
+                        timeInputLabel="Time:"
+                        wrapperClassName="date-picker"
+                        placeholderText={placeholder || "DD/MM/YYYY"}
+                        {...otherProps}
+                    />
+                </FormController>
+            );
+
+        case FromFiledTypes.RADIO:
+            return (
+                <FormController>
+                    <RadioCustomStyles>
+                        <div className=' flex w-full border-2 border-blue-gray-300/50 rounded-md border-dashed p-2'>
+                            {radioItems?.map((item) => (
+                                <Radio
+                                    {...field}
+                                    value={field.value}
+                                    icon={<IoIosCheckmarkCircle size={23} color="#7048BA" />}
+                                    ripple={false}
+                                    key={item + "theme"}
+                                    label={item}
+                                    onChange={field.onChange}
+                                    {...otherProps}
+                                />
+                            ))}
+                        </div>
+                    </RadioCustomStyles>
+                </FormController>
+            )
+
         default:
             break;
     }
@@ -166,6 +208,8 @@ export const CustomFormFields = <T extends FieldValues>(
     props: customFormsTypes<T>
 ) => {
     const { control, name, lable, fieldsName } = props;
+
+    if (!name || !control) throw new Error("Somehing went wrong");
 
     return (
         <Controller

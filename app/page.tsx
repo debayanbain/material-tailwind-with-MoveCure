@@ -34,7 +34,7 @@ export default function Home() {
               alt="Hero-Image"
             />
 
-            <div className="absolute inset-0 flex flex-col justify-end overflow-hidden p-2">
+            <div className="absolute inset-0 flex flex-col justify-end overflow-hidden p-2 max-sm:text-ellipsis">
               <TextEffect
                 isVisible={true}
                 text="Book an Appointment"

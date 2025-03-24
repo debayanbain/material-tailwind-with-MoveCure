@@ -32,6 +32,25 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
                     placeholder="eg. +91 1234567890"
                     showValidIcon={true}
                 />
+
+                <div className='flex justify-between gap-2 max-lg:flex-wrap'>
+                    <CustomFormFields
+                        control={control}
+                        fieldsName={FromFiledTypes.DATEPICKER}
+                        name="date_of_birth"
+                        lable='Date of Birth'
+                        placeholder="eg. 01/01/2000"
+                    />
+
+                    <CustomFormFields
+                        control={control}
+                        fieldsName={FromFiledTypes.RADIO}
+                        name="gender"
+                        lable='Choose Gender'
+                        placeholder="eg. Male"
+                        radioItems={['Male', 'Female', 'Other']}
+                    />
+                </div>
             </div >
         </>
     )

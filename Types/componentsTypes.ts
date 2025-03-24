@@ -8,6 +8,7 @@ type FormValues = {
     patientName: string;
     email: string;
     phone_number: string;
+    date_of_birth: Date | null | undefined;
     blood_group: string;
     allergies: string;
     problems: string;
@@ -78,6 +79,7 @@ export interface customFormsTypes<T extends FieldValues = FormValue> {
     name?: Path<T>,
     lable?: string,
     lableVariant?: string,
+    radioItems?: string[],
     placeholder?: string,
     iconSrc?: string,
     iconAlt?: string,

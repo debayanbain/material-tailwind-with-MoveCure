@@ -1,14 +1,15 @@
 import type { Config } from "tailwindcss";
 import withMT from "@material-tailwind/react/utils/withMT"
-import tailwindAnimation from "tailwindcss-animate"
-// const withMT = require("@material-tailwind/react/utils/withMT");
+import tailwindAnimation from "tailwindcss-animate";
+import { MaxVariantsPlugin } from 'tailwind-max-variants';
 
 const config: Config = {
-  darkMode: "class",
+  darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {
@@ -97,6 +98,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [tailwindAnimation],
-};
+  plugins: [
+    tailwindAnimation,
+    MaxVariantsPlugin
+  ],
+} satisfies Config
 export default withMT(config);

@@ -75,17 +75,115 @@ html {
   line-height: 0.5;
 }
 
+/* =====  REACT-DATEPICKER OVERRIDES */
+.react-datepicker-wrapper.date-picker {
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  align-items: center;
+}
+
+.react-datepicker,
+.react-datepicker__time,
+.react-datepicker__header,
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker-time__header {
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 600 !important;
+  background-color: #1a1d21 !important;
+  border-color: #363a3d !important;
+  color: #abb8c4 !important;
+  border-radius: 12px !important;
+}
+
+.react-datepicker__navigation{
+  top: 5px !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker-time__header {
+  color: #ffffff !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: #563e84 !important;
+}
+
+.react-datepicker__triangle {
+  fill: #1a1d21 !important;
+  color: #1a1d21 !important;
+  stroke: #1a1d21 !important;
+}
+
+.react-datepicker__time-list-item:hover {
+  background-color: #363a3d !important;
+}
+
+.react-datepicker__input-container input {
+  font-family: 'Nunito', sans-serif !important;
+  background-color: transparent !important;
+  width: 100%;
+  color: #515151;
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
+}
+
+.dark .react-datepicker__input-container input {
+  color: #ffffff !important;
+}
+
+.react-datepicker__input-container input::placeholder {
+  font-family: 'Nunito', sans-serif !important;
+  color: #cad0d3;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 1;
+}
+
+.dark .react-datepicker__input-container input::placeholder {
+  color: #515151;
+}
+
+.react-datepicker__day--selected {
+  background-color: #6A42B8 !important;
+  color: #ffffff !important;
+  border-radius: 4px;
+  font-size: larger !important;
+}
+
+.react-datepicker__time-list-item--selected {
+  background-color: #6A42B8 !important;
+}
+
+.react-datepicker__time-container {
+  border-left: 1px solid #363a3d !important;
+}
+
+.react-datepicker__time-list-item {
+  display: flex !important;
+  align-items: center !important;
+}
+
 /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
 .PhoneInputInput {
   max-width: 70% !important;
   background-color: transparent !important;
   outline: none;
   margin-left: 4px;
-  font-size: 14px;
-  font-weight: 500;
+  color: #515151;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dark .PhoneInputInput{
+  color: #ffffff !important;
 }
 
 .PhoneInputInput::placeholder {
+  font-family: 'Nunito', sans-serif !important;
   color: #cad0d3;
   font-size: 16px;
   font-weight: 600;

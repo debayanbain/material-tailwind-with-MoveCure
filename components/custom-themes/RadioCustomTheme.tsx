@@ -11,6 +11,7 @@ export default function RadioCustomStyles({ children }: Readonly<{ children: Rea
                     root: {
                         display: "inline-flex",
                         alignItems: "items-center",
+                        mr: "mr-2",
                     },
                     container: {
                         position: "relative",
@@ -38,7 +39,7 @@ export default function RadioCustomStyles({ children }: Readonly<{ children: Rea
                     },
                     label: {
                         mt: "mt-px",
-                        ml: "ml-1",
+                        ml: "ml-2",
                     },
                 },
             },

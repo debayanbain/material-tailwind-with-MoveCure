@@ -10,6 +10,9 @@ export const zodSchema = z.object({
         message: "Please enter a valid phone number.",
     }),
 
+    date_of_birth: z.date({ message: 'Date of Birth cannot be empty' }),
+    gender: z.string({ message: 'Gender cannot be empty' }),
+
     blood_group: z.string().nonempty({ message: 'Blood Group cannot be empty' }),
     allergies: z.string().min(3, { message: 'Allergies must be at least 3 characters long' })
     .max(20, { message: "Allergies does not exist of 20 character long" })

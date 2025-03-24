@@ -12,7 +12,6 @@ import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { FormValue, zodSchema } from "@/lib/zodValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MedicalInfo from "../Forms/StepperFrom/MedicalInfo";
-// import { FaArrowRightLong } from "react-icons/fa6";
 import GroupAnimationButton from "./GroupAnimationButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
@@ -24,6 +23,7 @@ export function DefaultStepper() {
       patientName: "",
       email: "",
       phone_number: "",
+      date_of_birth: undefined,
       blood_group: "",
       allergies: "",
       problems: "",
@@ -63,7 +63,7 @@ export function DefaultStepper() {
       label: "1",
       components: <PersonalInfo control={methods.control} />,
       description: "Personal Information",
-      fields: ["patientName", "email", "phone_number"],
+      fields: ["patientName", "email", "phone_number", "date_of_birth"],
     },
     {
       label: "2",
@@ -185,9 +185,9 @@ export function DefaultStepper() {
                   icons={<FaArrowRightLong  size={20} color="black" />}
                   buttonColor={"deep-purple"}
                   buttonVariant={"gradient"}
-                  buttonClass="text-center w-full rounded-full h-12 relative group overflow-hidden py-3 px-3"
-                  childrenClass={"bg-white group-focus:w-[90px] rounded-full h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"}
-                  textClass={"group-focus:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:group-hover:translate-x-[-10px] duration-500 delay-200"}
+                  buttonClass="text-center w-full rounded-2xl h-12 relative group overflow-hidden py-3 px-3"
+                  childrenClass={"bg-white group-focus:w-[90px] rounded-2xl h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"}
+                  textClass={"max-md:group-focus:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:group-hover:translate-x-[-10px] duration-500 delay-200"}
                 />
             </motion.div>
           </div>
