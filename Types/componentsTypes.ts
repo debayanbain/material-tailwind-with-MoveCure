@@ -4,11 +4,18 @@ import { type Variants } from "framer-motion";
 import React from 'react';
 import { Control, ControllerRenderProps, FieldPath, FieldValues, Path } from "react-hook-form";
 
+enum genderTypes {
+    Male = "Male",
+    Female = "Female",
+    Other = "Other"
+}
+
 type FormValues = {
     patientName: string;
     email: string;
     phone_number: string;
     date_of_birth: Date | null | undefined;
+    gender: genderTypes;
     blood_group: string;
     allergies: string;
     problems: string;

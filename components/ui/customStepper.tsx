@@ -23,7 +23,6 @@ export function DefaultStepper() {
       patientName: "",
       email: "",
       phone_number: "",
-      date_of_birth: undefined,
       blood_group: "",
       allergies: "",
       problems: "",
@@ -63,7 +62,7 @@ export function DefaultStepper() {
       label: "1",
       components: <PersonalInfo control={methods.control} />,
       description: "Personal Information",
-      fields: ["patientName", "email", "phone_number", "date_of_birth"],
+      fields: ["patientName", "email", "phone_number", "date_of_birth", 'gender'],
     },
     {
       label: "2",

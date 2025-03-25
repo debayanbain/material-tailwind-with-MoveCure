@@ -21,6 +21,7 @@ export default async function DynamicImage({
         placeholder='blur'
         blurDataURL={base64}
         className={cn(containerClass)}
+        priority
       />
   )
 }

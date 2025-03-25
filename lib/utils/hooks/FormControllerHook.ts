@@ -9,6 +9,7 @@ export default function useFormController() {
     const { getFieldState, formState } = useFormContext();
 
     const fieldState = getFieldState(itemContext.name, formState);
+    console.log(fieldState);
     const fieldName = itemContext.fieldName;
     return { ...fieldState, fieldName };
 }

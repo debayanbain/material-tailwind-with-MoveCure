@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext } from "react";
+import React, { createContext, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import {
     Controller,
@@ -25,7 +25,10 @@ import RadioCustomStyles from "./custom-themes/RadioCustomTheme";
 
 export const FormItemContext = createContext<FormFieldContextValue | null>(null);
 
-const FormController = ({ children, showValidIcon }: { children: React.ReactNode; showValidIcon?: boolean }) => {
+const FormController = forwardRef<HTMLDivElement, { children: React.ReactNode; showValidIcon?: boolean }>((
+    { children, showValidIcon },
+    ref
+) => {
     const { error, fieldName } = useFromState();
 
     return (
@@ -49,6 +52,7 @@ const FormController = ({ children, showValidIcon }: { children: React.ReactNode
                 )
             }
             <Slot
+                ref={ref}
                 className={cn(
                     "border-2 px-3 py-[0.7rem] rounded-md transition-colors",
                     error
@@ -60,7 +64,9 @@ const FormController = ({ children, showValidIcon }: { children: React.ReactNode
             </Slot>
         </div>
     );
-};
+});
+
+FormController.displayName = "FormController";
 
 const ErrorMessage = ({ children }: { children?: React.ReactNode }) => {
     const { error } = useFromState();
@@ -109,7 +115,6 @@ const RenderFields = ({
     props: customFormsTypes;
 }) => {
     const { fieldsName, placeholder, showValidIcon, radioItems, ...otherProps } = props;
-
     switch (fieldsName) {
         case FromFiledTypes.INPUT:
             return (
@@ -179,28 +184,29 @@ const RenderFields = ({
 
         case FromFiledTypes.RADIO:
             return (
-                <FormController>
-                    <RadioCustomStyles>
-                        <div className=' flex w-full border-2 border-blue-gray-300/50 rounded-md border-dashed p-2'>
-                            {radioItems?.map((item) => (
+                <RadioCustomStyles>
+                    <FormController>
+                        <div className='flex w-full !py-[0.5rem]'>
+                            {radioItems?.map((item, i) => (
                                 <Radio
                                     {...field}
-                                    value={field.value}
+                                    key={i + "gender"}
+                                    value={item}
+                                    checked={field.value === item}
                                     icon={<IoIosCheckmarkCircle size={23} color="#7048BA" />}
                                     ripple={false}
-                                    key={item + "theme"}
                                     label={item}
-                                    onChange={field.onChange}
+                                    onChange={() => field.onChange(item)}
                                     {...otherProps}
                                 />
                             ))}
                         </div>
-                    </RadioCustomStyles>
-                </FormController>
-            )
+                    </FormController>
+                </RadioCustomStyles>
+            );
 
         default:
-            break;
+            return null;
     }
 };
 
@@ -209,7 +215,7 @@ export const CustomFormFields = <T extends FieldValues>(
 ) => {
     const { control, name, lable, fieldsName } = props;
 
-    if (!name || !control) throw new Error("Somehing went wrong");
+    if (!name || !control) throw new Error("Something went wrong");
 
     return (
         <Controller
