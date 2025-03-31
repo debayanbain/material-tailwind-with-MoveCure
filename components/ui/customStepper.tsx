@@ -18,14 +18,16 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 export function DefaultStepper() {
   const methods = useForm<FormValue>({
     resolver: zodResolver(zodSchema),
-    mode: "onBlur",
+    mode: "onChange",
     defaultValues: {
       patientName: "",
       email: "",
       phone_number: "",
       blood_group: "",
+      address: "",
       allergies: "",
       problems: "",
+      file_upload: [],
       plan: "",
       paymentMethod: "",
     },
@@ -68,7 +70,7 @@ export function DefaultStepper() {
       label: "2",
       components: <MedicalInfo control={methods.control} />,
       description: "Medical Information",
-      fields: ["blood_group", "allergies", "problems"],
+      fields: ["blood_group", "allergies", "problems", "file_upload"],
     },
     {
       label: "3",
@@ -138,6 +140,7 @@ export function DefaultStepper() {
             componentsKey={activeStep}
             variants={slideLeftandRight}
             custom={direction}
+            className="w-full"
           >
             {/* Form Components Gose here */}
             {steps[activeStep].components}

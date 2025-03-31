@@ -40,7 +40,7 @@ export default function ThemeToggle({
     if (!mounted) return null;
 
     return (
-        <Menu placement="left-start" lockScroll={true}>
+        <Menu placement="left-start" lockScroll={false}>
             <MenuHandler>
                 <Button
                     variant="outlined"
@@ -58,7 +58,7 @@ export default function ThemeToggle({
                 </Button>
 
             </MenuHandler>
-            <MenuList className="min-w-[130px]">
+            <MenuList className="min-w-[130px] !z-[10000]">
                 {themeOption.map((item) => (
                     <MenuItem key={item + "theme"}>
                         <RadioCustomStyles>

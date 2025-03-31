@@ -16,11 +16,12 @@ const GroupAnimationButton = ({
 }: previousButtonProps) => {
   return (
     <Button
+      type={Steps ? "submit" : "button"}
       className={cn(
         buttonClass || "text-center w-20 rounded-2xl h-12 relative group overflow-hidden md:w-36"
       )}
       onClick={handlePrevorNext}
-      disabled={Steps}
+      disabled={false}
       color={buttonColor || "black"}
       variant={buttonVariant || "filled"}
       fullWidth

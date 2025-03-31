@@ -16,9 +16,11 @@ type FormValues = {
     phone_number: string;
     date_of_birth: Date | null | undefined;
     gender: genderTypes;
+    address: string;
     blood_group: string;
     allergies: string;
     problems: string;
+    file_upload: File[];
     plan: string;
     paymentMethod: string;
 }
@@ -70,6 +72,7 @@ export enum FromFiledTypes {
     SELECT = "select",
     SKELETON = "skeleton",
     RADIO = "radio",
+    FILE = "file",
 }
 
 export type FormFieldContextValue<
@@ -85,6 +88,7 @@ export interface customFormsTypes<T extends FieldValues = FormValue> {
     fieldsName?: FromFiledTypes,
     name?: Path<T>,
     lable?: string,
+    lableshowChip?: boolean, 
     lableVariant?: string,
     radioItems?: string[],
     placeholder?: string,
@@ -96,4 +100,9 @@ export interface customFormsTypes<T extends FieldValues = FormValue> {
     renderSkeleton?: (field: ControllerRenderProps) => React.ReactNode,
     iconComponents?: React.ReactNode
     showValidIcon?: boolean
+}
+
+export interface FileUploadTypes {
+    fields: ControllerRenderProps;
+    placeholders: string;
 }

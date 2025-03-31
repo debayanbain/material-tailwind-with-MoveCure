@@ -9,7 +9,7 @@ const NavBar = () => {
   return (
     <>
       <Navbar
-        className="mx-auto max-w-screen px-6 py-3 fixed left-0"
+        className="mx-auto max-w-screen px-6 py-3 fixed left-0 z-[9999]"
         fullWidth={true}
         variant="gradient"
         color="deep-purple"

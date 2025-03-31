@@ -4,31 +4,41 @@ import { FromFiledTypes } from '@/Types/componentsTypes';
 import { customFormsTypes } from '@/Types/componentsTypes';
 import { FormValue } from '@/lib/zodValidation';
 
-const MedicalInfo: React.FC<customFormsTypes<FormValue>> = ({ control })  => {
+const MedicalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
 
     return (
         <>
             <div className="mb-1 flex flex-col gap-2 static">
-            <CustomFormFields
+                <CustomFormFields
                     control={control}
                     fieldsName={FromFiledTypes.INPUT}
                     name="blood_group"
                     lable='Enter Your Blood Group'
                     placeholder="eg: O-positive"
                 />
-            <CustomFormFields
+                <CustomFormFields
                     control={control}
                     fieldsName={FromFiledTypes.INPUT}
                     name="allergies"
                     lable='Enter Your Allergies Name'
                     placeholder="eg: Food, Medicine"
                 />
-            <CustomFormFields
+                <CustomFormFields
                     control={control}
                     fieldsName={FromFiledTypes.TEXTAREA}
                     name="problems"
                     lable='Describe Your Problems'
                     placeholder="eg: Having neck pain for 2 days"
+                />
+
+                <span className='w-full text-center text-base font-semibold' >Or,</span>
+
+                <CustomFormFields
+                    control={control}
+                    fieldsName={FromFiledTypes.FILE}
+                    name="file_upload"
+                    lable='Upload Prescribtion'
+                    placeholder="Drag 'n' drop files here, or click to select"
                 />
             </div >
         </>

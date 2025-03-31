@@ -22,6 +22,8 @@ import useFromState from '@/lib/utils/hooks/FormControllerHook';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import RadioCustomStyles from "./custom-themes/RadioCustomTheme";
+import FileUpload from "./File_uploads";
+import { Chip } from "@/lib/MtConfig";
 
 export const FormItemContext = createContext<FormFieldContextValue | null>(null);
 
@@ -79,15 +81,22 @@ const ErrorMessage = ({ children }: { children?: React.ReactNode }) => {
     );
 };
 
-const FormLable = ({ children }: { children?: React.ReactNode }) => {
+const FormLable = ({ children, showChip }: { children?: React.ReactNode; showChip: boolean }) => {
     const { error } = useFromState();
 
     return (
-        <Typography variant="h6" className={cn("font-bold italic font-Nunito text-gray-900/70 dark:text-white",
-            error && "!decoration-dashed underline underline-offset-4 decoration-red-500"
-        )}>
-            {children}
-        </Typography>
+        <div className="w-full relative">
+            {showChip && (
+                <div className='absolute top-0 right-0'>
+                    <Chip value="67 years" size="sm" className='w-full' />
+                </div>
+            )}
+            <Typography variant="h6" className={cn("font-bold italic font-Nunito text-gray-900/70 dark:text-white",
+                error && "!decoration-dashed underline underline-offset-4 decoration-red-500"
+            )}>
+                {children}
+            </Typography>
+        </div>
     );
 };
 
@@ -205,6 +214,19 @@ const RenderFields = ({
                 </RadioCustomStyles>
             );
 
+        case FromFiledTypes.FILE:
+            return (
+                <FormController>
+                    <div className='w-full flex justify-center items-center !p-2 border-dashed'>
+                        <FileUpload
+                            fields={field as ControllerRenderProps}
+                            placeholders={placeholder!}
+                        />
+                    </div>
+                </FormController>
+            );
+
+
         default:
             return null;
     }
@@ -213,7 +235,7 @@ const RenderFields = ({
 export const CustomFormFields = <T extends FieldValues>(
     props: customFormsTypes<T>
 ) => {
-    const { control, name, lable, fieldsName } = props;
+    const { control, name, lable, fieldsName, lableshowChip } = props;
 
     if (!name || !control) throw new Error("Something went wrong");
 
@@ -224,7 +246,7 @@ export const CustomFormFields = <T extends FieldValues>(
             render={({ field }) => (
                 <FormItems name={name!} fieldName={fieldsName!}>
                     {fieldsName !== FromFiledTypes.CHECKBOX && lable && (
-                        <FormLable>{lable}</FormLable>
+                        <FormLable showChip={lableshowChip!}> {lable} </FormLable>
                     )}
 
                     <RenderFields

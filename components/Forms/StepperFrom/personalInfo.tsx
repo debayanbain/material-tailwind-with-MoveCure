@@ -5,6 +5,7 @@ import { customFormsTypes } from '@/Types/componentsTypes';
 import { FormValue } from '@/lib/zodValidation';
 
 
+
 const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
 
     return (
@@ -37,6 +38,7 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
                     <CustomFormFields
                         control={control}
                         fieldsName={FromFiledTypes.DATEPICKER}
+                        lableshowChip={true}
                         name="date_of_birth"
                         lable='Date of Birth'
                         placeholder="eg. 01/01/2000"
@@ -47,10 +49,17 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
                         fieldsName={FromFiledTypes.RADIO}
                         name="gender"
                         lable='Choose Gender'
-                        placeholder="eg. Male"
                         radioItems={['Male', 'Female', 'Other']}
                     />
                 </div>
+
+                <CustomFormFields
+                    control={control}
+                    fieldsName={FromFiledTypes.TEXTAREA}
+                    name="address"
+                    lable='Address'
+                    placeholder="eg: 123 Main St, City, Country"
+                />
             </div >
         </>
     )
