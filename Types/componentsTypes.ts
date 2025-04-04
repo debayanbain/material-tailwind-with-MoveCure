@@ -99,10 +99,18 @@ export interface customFormsTypes<T extends FieldValues = FormValue> {
     children?: React.ReactNode,
     renderSkeleton?: (field: ControllerRenderProps) => React.ReactNode,
     iconComponents?: React.ReactNode
-    showValidIcon?: boolean
+    showValidIcon?: boolean;
+    CustomChipValues?: string
+    onChangeChipValues?: (value: string) => void
 }
 
 export interface FileUploadTypes {
     fields: ControllerRenderProps;
     placeholders: string;
+}
+
+export interface DatepickerProps {
+    fields: ControllerRenderProps;
+    placeholder?: string;
+    onChangeChipValues?: (value: string) => void
 }

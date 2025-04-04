@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, forwardRef } from "react";
+import React, { createContext, forwardRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
     Controller,
@@ -19,11 +19,11 @@ import { Slot } from "@radix-ui/react-slot";
 import { FormValue } from "@/lib/zodValidation";
 import { IoIosCheckmarkCircle, IoMdCheckmarkCircleOutline } from "react-icons/io";
 import useFromState from '@/lib/utils/hooks/FormControllerHook';
-import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import RadioCustomStyles from "./custom-themes/RadioCustomTheme";
 import FileUpload from "./File_uploads";
 import { Chip } from "@/lib/MtConfig";
+import DatePickerCustom from "./DatePicker";
 
 export const FormItemContext = createContext<FormFieldContextValue | null>(null);
 
@@ -88,7 +88,7 @@ const FormLable = ({ children, showChip }: { children?: React.ReactNode; showChi
         <div className="w-full relative">
             {showChip && (
                 <div className='absolute top-0 right-0'>
-                    <Chip value="67 years" size="sm" className='w-full' />
+                    {/* <Chip value="67 years" size="sm" className='w-full' /> */}
                 </div>
             )}
             <Typography variant="h6" className={cn("font-bold italic font-Nunito text-gray-900/70 dark:text-white",
@@ -111,7 +111,7 @@ const FormItems = ({
 }) => {
     return (
         <FormItemContext.Provider value={{ name, fieldName }}>
-            <div className="w-full space-y-2">{children}</div>
+            <div className="relative w-full space-y-2">{children}</div>
         </FormItemContext.Provider>
     );
 };
@@ -123,7 +123,8 @@ const RenderFields = ({
     field: ControllerRenderProps;
     props: customFormsTypes;
 }) => {
-    const { fieldsName, placeholder, showValidIcon, radioItems, ...otherProps } = props;
+    const { fieldsName, placeholder, showValidIcon, radioItems, onChangeChipValues, ...otherProps } = props;
+
     switch (fieldsName) {
         case FromFiledTypes.INPUT:
             return (
@@ -177,17 +178,13 @@ const RenderFields = ({
         case FromFiledTypes.DATEPICKER:
             return (
                 <FormController>
-                    <DatePicker
-                        {...field}
-                        selected={field.value}
-                        onChange={(date) => field.onChange(date)}
-                        dateFormat={'dd/MM/yyyy'}
-                        showTimeSelect={false}
-                        timeInputLabel="Time:"
-                        wrapperClassName="date-picker"
-                        placeholderText={placeholder || "DD/MM/YYYY"}
-                        {...otherProps}
-                    />
+                    <div className="w-full">
+                        <DatePickerCustom
+                            fields={field}
+                            placeholder={placeholder}
+                            onChangeChipValues={onChangeChipValues}
+                        />
+                    </div>
                 </FormController>
             );
 
@@ -235,7 +232,8 @@ const RenderFields = ({
 export const CustomFormFields = <T extends FieldValues>(
     props: customFormsTypes<T>
 ) => {
-    const { control, name, lable, fieldsName, lableshowChip } = props;
+    const [ChipValues, setChipValues] = useState<null | undefined | string>(null);
+    const { control, name, lable, fieldsName, lableshowChip, CustomChipValues } = props;
 
     if (!name || !control) throw new Error("Something went wrong");
 
@@ -249,9 +247,23 @@ export const CustomFormFields = <T extends FieldValues>(
                         <FormLable showChip={lableshowChip!}> {lable} </FormLable>
                     )}
 
+                    {fieldsName === FromFiledTypes.DATEPICKER && lableshowChip && ChipValues && (
+                        <Chip value={ChipValues} size="sm" className='absolute right-0 top-0' />
+                    )}
+
                     <RenderFields
                         field={field as unknown as ControllerRenderProps}
-                        props={props as unknown as customFormsTypes<FormValue>}
+                        props={{
+                            ...props,
+                            onChangeChipValues: (value: string) => {
+                                if (!CustomChipValues) {
+                                    console.log(value);
+                                    setChipValues(`${value} years`)
+                                } else {
+                                    setChipValues(CustomChipValues);
+                                }
+                            },
+                        } as unknown as customFormsTypes<FormValue>}
                     />
                     <ErrorMessage />
                 </FormItems>

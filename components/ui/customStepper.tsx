@@ -18,7 +18,7 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 export function DefaultStepper() {
   const methods = useForm<FormValue>({
     resolver: zodResolver(zodSchema),
-    mode: "onChange",
+    mode: "onBlur",
     defaultValues: {
       patientName: "",
       email: "",

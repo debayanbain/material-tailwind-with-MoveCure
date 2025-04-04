@@ -4,8 +4,6 @@ import { FromFiledTypes } from '@/Types/componentsTypes';
 import { customFormsTypes } from '@/Types/componentsTypes';
 import { FormValue } from '@/lib/zodValidation';
 
-
-
 const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
 
     return (

@@ -3,6 +3,8 @@ import "./globals.css";
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   icons: "/favicon.ico",
@@ -26,7 +28,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <NavBar />
             {children}
+            <Footer />
             <SpeedInsights />
             <Analytics />
           </ThemeProvider>
