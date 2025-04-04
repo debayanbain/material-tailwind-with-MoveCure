@@ -13,7 +13,7 @@ const quickLinks = [
   { name: "Meet Our Team", href: "#therapists" },
   { name: "Testimonials", href: "#testimonials" },
   { name: "Book Appointment", href: "#book-appointment" },
-  { name: "Blog", href: "#" },
+  { name: "About Us", href: "/about_us" },
   { name: "FAQs", href: "#" }
 ];
 
@@ -33,14 +33,6 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-  };
 
   return (
     <footer id="contact" className="bg-gray-800 text-white pt-16 pb-8">
@@ -61,14 +53,15 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
-                <a
+                <Link
                   key={index}
                   href={link.href}
                   aria-label={link.label}
+                  target="blank"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   {link.icon}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -78,16 +71,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a
+                  <Link
                     href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(link.href);
-                    }}
                     className="text-base text-gray-400 hover:text-white transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -98,12 +87,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {serviceLinks.map((link, index) => (
                 <li key={index}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-base text-gray-400 hover:text-white transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -114,11 +103,11 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <RiMapPinAddFill size={17} className="mt-1 mr-3" />
-                <span className="text-base text-gray-400">123 Healing Street, Wellness City, MC 12345</span>
+                <span className="text-base text-gray-400">Barrackpore BT Road, Kolkata, 700120</span>
               </li>
               <li className="flex items-start">
                 <FaPhoneVolume size={17} className="mt-1 mr-3" />
-                <span className="text-base text-gray-400">(555) 123-4567</span>
+                <span className="text-base text-gray-400">(+91) 6291064916</span>
               </li>
               <li className="flex items-start">
                 <IoMdMailUnread size={17} className="mt-1 mr-3" />
@@ -127,9 +116,8 @@ export default function Footer() {
               <li className="flex items-start">
                 <FaRegClock size={17} className="mt-1 mr-3" />
                 <div className="text-base text-gray-400">
-                  <div>Monday - Friday: 8:00 AM - 7:00 PM</div>
-                  <div>Saturday: 9:00 AM - 5:00 PM</div>
-                  <div>Sunday: Closed</div>
+                  <div>Everyday (Monday - Sunday): 8:00 AM - 10:00 PM</div>
+                  <div>occasionally: Closed</div>
                 </div>
               </li>
             </ul>
@@ -142,7 +130,13 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} MoveCure Physiotherapy. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+              <Link href={"/privacy_policy"} className="text-gray-400 hover:text-white text-sm transition-colors">
+                Privacy Policy
+              </Link>
+
+              <Link href={"/refund_policy"} className="text-gray-400 hover:text-white text-sm transition-colors">
+                Refund Policy
+              </Link>
 
               <Link href="/term_condition" className="text-gray-400 hover:text-white text-sm transition-colors">
                 Terms of Service

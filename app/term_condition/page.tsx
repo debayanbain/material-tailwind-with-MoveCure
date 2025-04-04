@@ -17,7 +17,7 @@ const termAndCondition = () => {
                     Our Terms of Service
                 </h2>
 
-                <p className="mt-2 text-center text-gray-600">
+                <p className="mt-2 text-base text-center text-gray-600">
                     Read our Terms below to learn more about your rights and responsibilities.
                 </p>
 

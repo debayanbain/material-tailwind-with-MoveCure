@@ -6,14 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
-  //   const scrollToSection = (sectionId: string) => {
-  //     const element = document.querySelector(sectionId);
-  //     if (element) {
-  //       element.scrollIntoView({
-  //         behavior: "smooth"
-  //       });
-  //     }
-  //   };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -86,7 +78,7 @@ export default function Hero() {
                 className="mt-8 md:mt-10 space-x-4 flex flex-wrap"
                 variants={itemVariants}
               >
-                <Link href={'/booking'}>
+                <Link href={'/booking'} target="blank">
                   <Button
                     variant="gradient"
                     size="lg"

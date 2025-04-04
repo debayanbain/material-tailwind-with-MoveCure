@@ -1,9 +1,57 @@
 "use client";
 
 import React from "react";
-import { Navbar, Tooltip } from "@/lib/MtConfig";
+import { Navbar, Tooltip, Typography } from "@/lib/MtConfig";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import Image from "next/image";
+import Link from "next/link";
+
+function NavList() {
+  return (
+    <ul className="my-2 flex flex-col gap-2  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <Link href="/" className="flex items-center text-white hover:text-blue-500 transition-colors">
+          Home
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <Link href="/" className="flex items-center text-white hover:text-blue-500 transition-colors">
+          Servies
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <Link href="/" className="flex items-center text-white hover:text-blue-500 transition-colors">
+          Our Team
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <a href="#" className="flex items-center text-white hover:text-blue-500 transition-colors">
+          Docs
+        </a>
+      </Typography>
+    </ul>
+  );
+}
 
 const NavBar = () => {
   return (
@@ -18,20 +66,27 @@ const NavBar = () => {
           <Tooltip
             placement="bottom"
             content="Click to go Home Page"
+            className="z-[9999]"
             animate={{
               mount: { scale: 1, y: 0 },
               unmount: { scale: 0, y: -25 },
             }}
           >
-            <Image
-              src={"/images/Main Logo.png"}
-              alt="Main Logo"
-              width={160}
-              height={100}
-            />
+            <Link href={'/'}>
+              <Image
+                src={"/images/Main Logo.png"}
+                alt="Main Logo"
+                width={160}
+                height={100}
+              />
+            </Link>
           </Tooltip>
 
-          <div className="ml-auto flex gap-1 md:mr-4">
+          <div className="hidden lg:block">
+            <NavList />
+          </div>
+
+          <div className="flex gap-1 md:mr-4">
             <ThemeToggle
               iconClass="text-white"
               iconsButtonClass="border-gray-300/50"
