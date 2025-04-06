@@ -111,7 +111,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start">
                 <IoMdMailUnread size={17} className="mt-1 mr-3" />
-                <span className="text-base text-gray-400">info@movecure.com</span>
+                <span className="text-base text-gray-400">movecure51@gmail.com</span>
               </li>
               <li className="flex items-start">
                 <FaRegClock size={17} className="mt-1 mr-3" />
