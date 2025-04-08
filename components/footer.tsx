@@ -1,6 +1,6 @@
 "use client"
 
-import { FaFacebook, FaTwitter, FaRegClock } from "react-icons/fa";
+import { FaRegClock } from "react-icons/fa";
 import { RiMapPinAddFill } from "react-icons/ri";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoMdMailUnread } from "react-icons/io";
