@@ -21,8 +21,8 @@ type FormValues = {
     allergies: string;
     problems: string;
     file_upload: File[];
-    plan: string;
-    paymentMethod: string;
+    // plan?: string;
+    amount: number;
 }
 
 export type stepsProps = { 
@@ -95,6 +95,7 @@ export interface customFormsTypes<T extends FieldValues = FormValue> {
     iconSrc?: string,
     iconAlt?: string,
     disabled?: boolean,
+    readOnly?: boolean,
     dateFormat?: string,
     children?: React.ReactNode,
     renderSkeleton?: (field: ControllerRenderProps) => React.ReactNode,

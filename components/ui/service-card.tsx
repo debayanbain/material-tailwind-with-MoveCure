@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa6";
+// import { FaArrowRight } from "react-icons/fa6";
 import { type Service } from "@/Constant/services";
 
 interface ServiceCardProps {
@@ -54,9 +54,9 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
             {service.description}
           </p>
         </div>
-        <a href="#" className="inline-flex items-center text-purple-600 hover:text-primary font-medium transition-colors">
+        {/* <a href="#" className="inline-flex items-center text-purple-600 hover:text-primary font-medium transition-colors">
           Learn more <FaArrowRight size={16} className="ml-1" />
-        </a>
+        </a> */}
       </div>
     </motion.div>
   );

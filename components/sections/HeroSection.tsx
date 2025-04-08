@@ -87,13 +87,13 @@ export default function Hero() {
                     Book Appointment
                   </Button>
                 </Link>
-                <Button
+                {/* <Button
                   variant="gradient"
                   size="lg"
                   className="border-white text-white hover:bg-white hover:text-primary"
                 >
                   Our Services
-                </Button>
+                </Button> */}
               </motion.div>
             </motion.div>
 

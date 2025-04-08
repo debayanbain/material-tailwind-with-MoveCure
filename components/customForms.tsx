@@ -133,10 +133,12 @@ const RenderFields = ({
                         {...field}
                         size="lg"
                         placeholder={placeholder}
-                        className="!border-2 placeholder:text-blue-gray-300/50 placeholder:opacity-100 dark:text-white"
+                        className="!border-2 placeholder:text-blue-gray-300/50 placeholder:opacity-100 dark:text-white disabled:bg-gray-100 disabled:text-gray-500"
                         labelProps={{
                             className: "before:content-none after:content-none",
                         }}
+                        disabled={props.disabled}
+                        readOnly={props.readOnly}
                         {...otherProps}
                     />
                 </FormController>

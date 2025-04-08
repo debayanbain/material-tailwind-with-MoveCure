@@ -39,8 +39,10 @@ export const zodSchema = z.object({
 
   file_upload: z.array(z.instanceof(File)).optional(),
 
-  plan: z.string().optional(),
-  paymentMethod: z.string().optional(),
+  // plan: z.string().optional(),
+  // paymentMethod: z.string().optional(),
+
+  amount: z.number().min(100, { message: "Amount must be at least 100" }),
 });
 
 export type FormValue = z.infer<typeof zodSchema>;

@@ -40,7 +40,7 @@ const MedicalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
                     lable='Upload Prescribtion'
                     placeholder="Drag 'n' drop files here, or click to select"
                 />
-            </div >
+            </div>
         </>
     )
 }

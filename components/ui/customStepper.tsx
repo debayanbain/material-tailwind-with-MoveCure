@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import MedicalInfo from "../Forms/StepperFrom/MedicalInfo";
 import GroupAnimationButton from "./GroupAnimationButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import PaymentService from "../Forms/StepperFrom/payment";
 
 export function DefaultStepper() {
   const methods = useForm<FormValue>({
@@ -28,8 +29,7 @@ export function DefaultStepper() {
       allergies: "",
       problems: "",
       file_upload: [],
-      plan: "",
-      paymentMethod: "",
+      amount: 100,
     },
   });
 
@@ -74,9 +74,9 @@ export function DefaultStepper() {
     },
     {
       label: "3",
-      components: <PersonalInfo control={methods.control} />,
+      components: <PaymentService control={methods.control} />,
       description: "Plan & Payment",
-      fields: ["blood_group", "allergies"],
+      fields: ["amount"],
     },
   ];
 

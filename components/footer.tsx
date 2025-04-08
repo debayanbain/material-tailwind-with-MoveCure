@@ -12,25 +12,25 @@ const quickLinks = [
   { name: "Our Services", href: "#services" },
   { name: "Meet Our Team", href: "#therapists" },
   { name: "Testimonials", href: "#testimonials" },
-  { name: "Book Appointment", href: "#book-appointment" },
+  { name: "Book Appointment", href: "/booking" },
   { name: "About Us", href: "/about_us" },
-  { name: "FAQs", href: "#" }
+  // { name: "FAQs", href: "#" }
 ];
 
-const serviceLinks = [
-  { name: "Sports Rehabilitation", href: "#" },
-  { name: "Manual Therapy", href: "#" },
-  { name: "Neurological Rehabilitation", href: "#" },
-  { name: "Pediatric Therapy", href: "#" },
-  { name: "Pain Management", href: "#" },
-  { name: "Geriatric Physiotherapy", href: "#" },
-  { name: "Workplace Injuries", href: "#" }
-];
+// const serviceLinks = [
+//   { name: "Sports Rehabilitation", href: "#" },
+//   { name: "Manual Therapy", href: "#" },
+//   { name: "Neurological Rehabilitation", href: "#" },
+//   { name: "Pediatric Therapy", href: "#" },
+//   { name: "Pain Management", href: "#" },
+//   { name: "Geriatric Physiotherapy", href: "#" },
+//   { name: "Workplace Injuries", href: "#" }
+// ];
 
-const socialLinks = [
-  { icon: <FaFacebook size={25} />, href: "#", label: "Facebook" },
-  { icon: <FaTwitter size={25} />, href: "#", label: "Twitter" },
-];
+// const socialLinks = [
+//   { icon: <FaFacebook size={25} />, href: "#", label: "Facebook" },
+//   { icon: <FaTwitter size={25} />, href: "#", label: "Twitter" },
+// ];
 
 export default function Footer() {
 
@@ -52,7 +52,7 @@ export default function Footer() {
               Your trusted partner in physiotherapy and rehabilitation. We are dedicated to helping you move better and live pain-free.
             </p>
             <div className="flex space-x-4">
-              {socialLinks.map((link, index) => (
+              {/* {socialLinks.map((link, index) => (
                 <Link
                   key={index}
                   href={link.href}
@@ -62,7 +62,7 @@ export default function Footer() {
                 >
                   {link.icon}
                 </Link>
-              ))}
+              ))} */}
             </div>
           </div>
 
@@ -82,7 +82,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <h4 className="text-lg font-bold mb-6">Services</h4>
             <ul className="space-y-3">
               {serviceLinks.map((link, index) => (
@@ -96,7 +96,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           <div>
             <h4 className="text-lg font-bold mb-6">Contact Us</h4>

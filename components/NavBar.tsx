@@ -25,7 +25,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <Link href="/" className="flex items-center text-white hover:text-blue-500 transition-colors">
+        <Link href="#services" className="flex items-center text-white hover:text-blue-500 transition-colors">
           Servies
         </Link>
       </Typography>
@@ -35,19 +35,9 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <Link href="/" className="flex items-center text-white hover:text-blue-500 transition-colors">
+        <Link href="#therapists" className="flex items-center text-white hover:text-blue-500 transition-colors">
           Our Team
         </Link>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        <a href="#" className="flex items-center text-white hover:text-blue-500 transition-colors">
-          Docs
-        </a>
       </Typography>
     </ul>
   );
