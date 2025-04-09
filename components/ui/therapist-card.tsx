@@ -28,7 +28,7 @@ export default function TherapistCard({ therapist, index }: TherapistCardProps) 
 
   return (
     <motion.div
-      className="bg-white rounded-lg shadow-md overflow-hidden text-center"
+      className="bg-white rounded-lg shadow-md overflow-hidden text-center border border-gray-200"
       variants={cardVariants}
       initial="hidden"
       animate="visible"

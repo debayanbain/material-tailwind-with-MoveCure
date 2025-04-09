@@ -24,7 +24,7 @@ export default function TestimonialCard({ testimonial, index }: TestimonialCardP
 
   return (
     <motion.div
-      className="bg-white p-6 rounded-lg shadow-md h-full"
+      className="bg-white p-6 rounded-lg shadow-md h-full border border-gray-200"
       variants={cardVariants}
       initial="hidden"
       animate="visible"
@@ -38,7 +38,7 @@ export default function TestimonialCard({ testimonial, index }: TestimonialCardP
             alt={testimonial.name} 
             width={100}
             height={100}
-            className="w-12 h-12 rounded-full mr-4 object-cover"
+            className="w-12 h-12 rounded-full mr-4 object-cover border-2 border-gray-200"
           />
           <div>
             <h4 className="font-bold text-gray-800">{testimonial.name}</h4>
