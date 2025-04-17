@@ -236,6 +236,24 @@ html {
   animation: pulse 2s 1s ease-out infinite;
 }
 
+.slick-track{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.slick-dots{
+  bottom: 0 !important;
+}
+
+.slick-dots li.slick-active button:before{
+  color: #6A42B8 !important;
+}
+
+.slick-dots li button:before{
+  color: #6A42B8 !important;
+}
+
 @keyframes pulse {
   100% {
     transform: scale(1.85);

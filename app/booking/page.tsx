@@ -44,7 +44,6 @@ const page = () => {
           <RegistrationPatient />
 
           <div className="dark:text-gray-400/50 mt-12 flex justify-between p-6 text-black/30">
-            <p>@2025 MoveCure</p>
           </div>
         </section>
       </div>

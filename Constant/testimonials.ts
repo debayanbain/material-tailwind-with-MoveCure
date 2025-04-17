@@ -4,6 +4,13 @@ export interface Testimonial {
   content: string;
   image: string;
   rating: number;
+  reviewer?: {
+    profilePhotoUrl: string;
+    displayName: string;
+  };
+  createTime?: string;
+  comment?: string;
+  starRating?: number;
 }
 
 export const testimonials: Testimonial[] = [

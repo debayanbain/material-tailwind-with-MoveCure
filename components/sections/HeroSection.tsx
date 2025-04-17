@@ -87,13 +87,15 @@ export default function Hero() {
                     Book Appointment
                   </Button>
                 </Link>
-                {/* <Button
-                  variant="gradient"
-                  size="lg"
-                  className="border-white text-white hover:bg-white hover:text-primary"
-                >
-                  Our Services
-                </Button> */}
+                <Link href={'#services'}>
+                  <Button
+                    variant="gradient"
+                    size="lg"
+                    className="border-white text-white hover:bg-white hover:text-primary"
+                  >
+                    Our Services
+                  </Button>
+                </Link>
               </motion.div>
             </motion.div>
 
