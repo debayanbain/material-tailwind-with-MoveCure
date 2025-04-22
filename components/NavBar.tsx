@@ -64,7 +64,7 @@ const NavBar = () => {
           >
             <Link href={'/'}>
               <Image
-                src={"/images/Main Logo.png"}
+                src={"/images/Final Logo White.png"}
                 alt="Main Logo"
                 width={160}
                 height={100}

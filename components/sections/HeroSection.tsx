@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/lib/MtConfig";
 import Image from "next/image";
 import Link from "next/link";
+import BadgeReview from "../ui/BadgeReview";
 
 export default function Hero() {
 
@@ -23,7 +24,7 @@ export default function Hero() {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5
+        duration: 0.7
       }
     }
   };
@@ -74,6 +75,11 @@ export default function Hero() {
               >
                 Professional physiotherapy services to help you recover, strengthen, and improve your quality of life.
               </motion.p>
+
+              <motion.div className="w-full" variants={itemVariants}>
+                <BadgeReview />
+              </motion.div>
+
               <motion.div
                 className="mt-8 md:mt-10 space-x-4 flex flex-wrap"
                 variants={itemVariants}

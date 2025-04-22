@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/footer";
+import { Providers } from '@/app/provider';
 
 export const metadata: Metadata = {
   icons: "/favicon.ico",
@@ -22,18 +23,20 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head />
         <body>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NavBar />
-            {children}
-            <Footer />
-            <SpeedInsights />
-            <Analytics />
-          </ThemeProvider>
+          <Providers>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NavBar />
+              {children}
+              <Footer />
+              <SpeedInsights />
+              <Analytics />
+            </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </>

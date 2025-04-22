@@ -5,7 +5,8 @@ import CustomCarousel from './CustomCarousel';
 
 const Reviews = React.memo(() => {
     return (
-        <ReactGoogleReviews layout="custom" featurableId={"28fe43d6-7d48-495c-9ccd-19d797f73eea"} renderer={(reviews)=> {
+        <ReactGoogleReviews layout="custom" featurableId={"28fe43d6-7d48-495c-9ccd-19d797f73eea"} renderer={(reviews) => {
+
             return (
                 <CustomCarousel reviews={reviews} />
             )
