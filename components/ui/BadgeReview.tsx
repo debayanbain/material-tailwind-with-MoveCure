@@ -1,6 +1,6 @@
 'use client'
 
-import FireCelebrateion from '@/app/Invoice/page';
+import FireCelebrateion from '@/components/Fire';
 import AvatarGroup from '@atlaskit/avatar-group';
 import { ReactGoogleReview, ReactGoogleReviews } from 'react-google-reviews';
 import "react-google-reviews/dist/index.css";
@@ -12,7 +12,6 @@ const BadgeReview = () => {
             layout="custom"
             featurableId="28fe43d6-7d48-495c-9ccd-19d797f73eea"
             renderer={(reviews: ReactGoogleReview[]) => {
-                console.log('reviews', reviews);
 
                 const avaData = reviews.map((item, i) => ({
                     key: i + 'avatar',

@@ -13,7 +13,7 @@ const fireConfetti = () => {
 const FireCelebrateion = () => {
     return (
         <div>
-            <Button variant="filled" onClick={fireConfetti}>
+            <Button variant="gradient" onClick={fireConfetti}>
                 Fire
             </Button>
         </div>
