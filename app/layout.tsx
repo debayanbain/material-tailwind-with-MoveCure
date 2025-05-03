@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/footer";
 import { Providers } from '@/app/provider';
+import Script from "next/script";
 
 export const metadata: Metadata = {
   icons: "/favicon.ico",
@@ -37,6 +38,10 @@ export default function RootLayout({
               <Analytics />
             </ThemeProvider>
           </Providers>
+          <Script src="https://mercury-stg.phonepe.com/web/bundle/checkout.js" 
+          strategy="afterInteractive"
+          defer
+          />
         </body>
       </html>
     </>

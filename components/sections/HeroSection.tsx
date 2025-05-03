@@ -93,7 +93,7 @@ export default function Hero() {
                     Book Appointment
                   </Button>
                 </Link>
-                <Link href={'#services'}>
+                <Link href={'#services'} target="blank">
                   <Button
                     variant="gradient"
                     size="lg"

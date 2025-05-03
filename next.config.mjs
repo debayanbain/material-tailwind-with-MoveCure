@@ -28,9 +28,6 @@ const nextConfig = {
       }
     ],
   },
-  env: {
-    FEATURABLE_WIDGET: process.env.FEATURABLE_WIDGET_ID,
-  },
 };
 
 export default withPlaiceholder(nextConfig);
