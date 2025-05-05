@@ -15,8 +15,12 @@ import MedicalInfo from "../Forms/StepperFrom/MedicalInfo";
 import GroupAnimationButton from "./GroupAnimationButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import PaymentService from "../Forms/StepperFrom/payment";
+import { useRouter } from 'next/navigation';
 
-export function DefaultStepper() {
+const CustomStepper = () => {
+
+  const router = useRouter();
+
   const methods = useForm<FormValue>({
     resolver: zodResolver(zodSchema),
     mode: "onBlur",
@@ -95,7 +99,18 @@ export function DefaultStepper() {
   };
 
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
+    window.PhonePeCheckout?.transact({
+      tokenUrl: "https://mercury-uat.phonepe.com/transact/uat_v2?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzT24iOjE3NDY0ODgzMjYyNDIsIm1lcmNoYW50SWQiOiJURVNULU0yMkFMN1dFM1FXUjEiLCJtZXJjaGFudE9yZGVySWQiOiJkOWE4YmU3MC01NGViLTQ1YmYtYTFlOC1lNzRjZDgwYTY5YmQifQ.UvPoPYlcZd8DsIcs0Ftxl1kupTt8eCQcngoYvupV71k",
+      type: 'IFRAME',
+      callback: (status: string) => {
+        if (status === 'CONCLUDED') {
+          router.replace('/invoice/dhvdjhjjvhdhddjvvd')
+          console.log("success", data);
+        } else {
+          console.log("Failed");
+        }
+      }
+    });
   };
 
   useEffect(() => {
@@ -135,6 +150,8 @@ export function DefaultStepper() {
                 </Step>
               ))}
           </Stepper>
+
+          <div id="phonepe-checkout-container"></div>
 
           <Animation
             componentsKey={activeStep}
@@ -198,3 +215,5 @@ export function DefaultStepper() {
     </FormProvider>
   );
 }
+
+export default CustomStepper;

@@ -1,10 +1,10 @@
 import React from 'react'
-import { DefaultStepper } from "@/components/ui/customStepper";
+import CustomStepper from "@/components/ui/customStepper";
 
 const RegistrationPatient = () => {
     return (
         <>
-           <DefaultStepper />
+           <CustomStepper />
         </>
     )
 }

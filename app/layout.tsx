@@ -41,6 +41,7 @@ export default function RootLayout({
           <Script src="https://mercury-stg.phonepe.com/web/bundle/checkout.js" 
           strategy="afterInteractive"
           defer
+          async
           />
         </body>
       </html>
