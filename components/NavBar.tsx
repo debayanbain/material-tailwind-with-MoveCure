@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { Navbar, Tooltip, Typography } from "@/lib/MtConfig";
-import ThemeToggle from "@/components/ui/ThemeToggle";
+import { Navbar, Tooltip, Typography, Chip, Button } from "@/lib/MtConfig";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -52,7 +51,7 @@ const NavBar = () => {
         variant="gradient"
         color="deep-purple"
       >
-        <div className="flex items-center justify-between text-blue-gray-900">
+        <div className="relative flex items-center justify-between text-blue-gray-900">
           <Tooltip
             placement="bottom"
             content="Click to go Home Page"
@@ -63,12 +62,23 @@ const NavBar = () => {
             }}
           >
             <Link href={'/'}>
-              <Image
-                src={"/images/Final Logo White.png"}
-                alt="Main Logo"
-                width={160}
-                height={100}
-              />
+              <div className="relative w-full">
+                <div className="absolute top-[-4px] right-[-32px]">
+                  <Chip
+                    variant="filled"
+                    value='Beta'
+                    size="sm"
+                    className="text-[9px] bg-yellow-600 text-black animate-tilt-shaking"
+                  />
+                </div>
+                <Image
+                  src={"/images/Final Logo White.png"}
+                  alt="Main Logo"
+                  width={160}
+                  height={100}
+                  priority
+                />
+              </div>
             </Link>
           </Tooltip>
 
@@ -77,10 +87,9 @@ const NavBar = () => {
           </div>
 
           <div className="flex gap-1 md:mr-4">
-            <ThemeToggle
-              iconClass="text-white"
-              iconsButtonClass="border-gray-300/50"
-            />
+            <Button variant="filled" className="bg-white text-primary hover:bg-gray-100" size="sm">
+              Contact Us
+            </Button>
           </div>
         </div>
       </Navbar>

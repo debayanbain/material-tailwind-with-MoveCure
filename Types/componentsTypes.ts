@@ -49,6 +49,8 @@ export interface previousButtonProps {
     childrenClass?: string,
     textClass?: string,
     icons?: React.ReactElement,
+    isPending?: boolean,
+    animatedIcons?: React.ReactElement,
     buttonVariant?: ButtonProps["variant"],
     buttonColor?: ButtonProps["color"],
 }

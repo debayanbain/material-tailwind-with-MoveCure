@@ -16,10 +16,13 @@ import GroupAnimationButton from "./GroupAnimationButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import PaymentService from "../Forms/StepperFrom/payment";
 import { useRouter } from 'next/navigation';
+import { useCreatePaymentLink } from "@/lib/utils/hooks/CreatePaymentLink";
 
 const CustomStepper = () => {
 
   const router = useRouter();
+
+  const { mutate: createPaymentFn, isPending } = useCreatePaymentLink();
 
   const methods = useForm<FormValue>({
     resolver: zodResolver(zodSchema),
@@ -99,18 +102,31 @@ const CustomStepper = () => {
   };
 
   const onSubmit = (data: FieldValues) => {
-    window.PhonePeCheckout?.transact({
-      tokenUrl: "https://mercury-uat.phonepe.com/transact/uat_v2?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzT24iOjE3NDY0ODgzMjYyNDIsIm1lcmNoYW50SWQiOiJURVNULU0yMkFMN1dFM1FXUjEiLCJtZXJjaGFudE9yZGVySWQiOiJkOWE4YmU3MC01NGViLTQ1YmYtYTFlOC1lNzRjZDgwYTY5YmQifQ.UvPoPYlcZd8DsIcs0Ftxl1kupTt8eCQcngoYvupV71k",
-      type: 'IFRAME',
-      callback: (status: string) => {
-        if (status === 'CONCLUDED') {
-          router.replace('/invoice/dhvdjhjjvhdhddjvvd')
-          console.log("success", data);
-        } else {
-          console.log("Failed");
-        }
+
+    const amount = Number(1000);
+
+    createPaymentFn({ PayAmount: amount }, {
+      onSuccess: (res) => {
+        
+        const tokenUrl = res?.response?.redirectUrl;        
+        
+        window.PhonePeCheckout?.transact({
+          tokenUrl: tokenUrl,
+          type: 'IFRAME',
+          callback: (status: string) => {
+            if (status === 'CONCLUDED') {
+              router.replace('/invoice/dhvdjhjjvhdhddjvvd')
+              console.log("success", data);
+            } else {
+              console.log("Failed");
+            }
+          }
+        });
+      },
+      onError: (err) => {
+        console.log(err)
       }
-    });
+    })
   };
 
   useEffect(() => {
@@ -177,11 +193,12 @@ const CustomStepper = () => {
                 }}
                 layout
               >
-                <GroupAnimationButton 
+                <GroupAnimationButton
                   text={"Previous"}
                   handlePrevorNext={handlePrev}
                   Steps={isFirstStep}
-                  icons={<FaArrowLeftLong  size={20} color="black" />}
+                  icons={<FaArrowLeftLong size={20} color="black" />}
+                  isPending={isPending}
                   buttonColor={"deep-orange"}
                 />
               </motion.div>
@@ -197,17 +214,19 @@ const CustomStepper = () => {
               className="w-full"
               layout
             >
-               <GroupAnimationButton 
-                  text={"Continue"}
-                  handlePrevorNext={handleNext}
-                  Steps={isLastStep}
-                  icons={<FaArrowRightLong  size={20} color="black" />}
-                  buttonColor={"deep-purple"}
-                  buttonVariant={"gradient"}
-                  buttonClass="text-center w-full rounded-2xl h-12 relative group overflow-hidden py-3 px-3"
-                  childrenClass={"bg-white group-focus:w-[90px] rounded-2xl h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"}
-                  textClass={"max-md:group-focus:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:group-hover:translate-x-[-10px] duration-500 delay-200"}
-                />
+              <GroupAnimationButton
+                text={"Continue"}
+                handlePrevorNext={handleNext}
+                Steps={isLastStep}
+                icons={<FaArrowRightLong size={20} color="black" />}
+                animatedIcons= {<span className="loader"></span>}
+                isPending={isPending}
+                buttonColor={"deep-purple"}
+                buttonVariant={"gradient"}
+                buttonClass="text-center w-full rounded-2xl h-12 relative group overflow-hidden py-3 px-3"
+                childrenClass={"bg-white group-focus:w-[90px] rounded-2xl h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"}
+                textClass={"max-md:group-focus:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:group-hover:translate-x-[-10px] duration-500 delay-200"}
+              />
             </motion.div>
           </div>
         </div>

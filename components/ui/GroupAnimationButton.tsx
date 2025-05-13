@@ -13,7 +13,13 @@ const GroupAnimationButton = ({
   childrenClass,
   textClass,
   icons,
+  animatedIcons,
+  isPending,
 }: previousButtonProps) => {
+
+  const displayText = isPending && animatedIcons ? "Loading..." : text;
+  const isAnimatedIcons = isPending && animatedIcons ? animatedIcons : icons;
+
   return (
     <Button
       type={Steps ? "submit" : "button"}
@@ -21,7 +27,7 @@ const GroupAnimationButton = ({
         buttonClass || "text-center w-20 rounded-2xl h-12 relative group overflow-hidden md:w-36"
       )}
       onClick={handlePrevorNext}
-      disabled={false}
+      disabled={isPending}
       color={buttonColor || "black"}
       variant={buttonVariant || "filled"}
       fullWidth
@@ -31,10 +37,10 @@ const GroupAnimationButton = ({
           childrenClass || "bg-white rounded-2xl h-[2.5rem] w-[90%] flex items-center justify-center absolute left-1 top-[4px] md:group-hover:w-[135px] z-10 delay-75 duration-500 md:left-1 md:w-1/3"
         )}
       >
-        {icons}
+        {isAnimatedIcons}
       </div>
       <p className={cn(textClass || "hidden translate-x-4 !text-[12px] text-white md:text-14 md:block ")}>
-        {text}
+        {displayText}
       </p>
     </Button>
   );

@@ -236,21 +236,21 @@ html {
   animation: pulse 2s 1s ease-out infinite;
 }
 
-.slick-track{
+.slick-track {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-.slick-dots{
+.slick-dots {
   bottom: 0 !important;
 }
 
-.slick-dots li.slick-active button:before{
+.slick-dots li.slick-active button:before {
   color: #6A42B8 !important;
 }
 
-.slick-dots li button:before{
+.slick-dots li button:before {
   color: #6A42B8 !important;
 }
 
@@ -260,3 +260,23 @@ html {
     opacity: 0;
   }
 }
+
+.loader {
+  width: 23px;
+  height: 23px;
+  border: 3px solid #734CBC;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 

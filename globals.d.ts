@@ -1,4 +1,3 @@
-// globals.d.ts
 interface Window {
     PhonePeCheckout?: {
       transact: (options: {
