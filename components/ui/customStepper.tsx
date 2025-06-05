@@ -103,20 +103,20 @@ const CustomStepper = () => {
 
   const onSubmit = (data: FieldValues) => {
 
-    const amount = Number(1000);
+    const amount = Number(data.amount);
 
     createPaymentFn({ PayAmount: amount }, {
       onSuccess: (res) => {
-        
-        const tokenUrl = res?.response?.redirectUrl;        
-        
+
+        const tokenUrl = res?.response?.redirectUrl;
+        const merchantOrder = res?.merchantOrderId;
+
         window.PhonePeCheckout?.transact({
           tokenUrl: tokenUrl,
           type: 'IFRAME',
           callback: (status: string) => {
             if (status === 'CONCLUDED') {
-              router.replace('/invoice/dhvdjhjjvhdhddjvvd')
-              console.log("success", data);
+              router.replace(`/invoice/${merchantOrder}?userName=${data.patientName}`);
             } else {
               console.log("Failed");
             }
@@ -219,7 +219,7 @@ const CustomStepper = () => {
                 handlePrevorNext={handleNext}
                 Steps={isLastStep}
                 icons={<FaArrowRightLong size={20} color="black" />}
-                animatedIcons= {<span className="loader"></span>}
+                animatedIcons={<span className="loader"></span>}
                 isPending={isPending}
                 buttonColor={"deep-purple"}
                 buttonVariant={"gradient"}

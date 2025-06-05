@@ -1,6 +1,7 @@
 import apiClient from "../axiosInstance";
 
 type CreatePaymentResponse = {
+    merchantOrderId: string,
     response: {
         redirectUrl: string
     }
@@ -9,7 +10,7 @@ type CreatePaymentResponse = {
 export const createPayment = async ({ PayAmount }: { PayAmount: number }) => {
     const result = await apiClient.request<CreatePaymentResponse>({
         method: 'POST',
-        baseURL: 'https://move-cure-backend.vercel.app',
+        baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
         url: '/userAuth/create-payment',
         data: {
             PayAmount: PayAmount
