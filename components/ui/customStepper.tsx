@@ -15,14 +15,18 @@ import MedicalInfo from "../Forms/StepperFrom/MedicalInfo";
 import GroupAnimationButton from "./GroupAnimationButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import PaymentService from "../Forms/StepperFrom/payment";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { useCreatePaymentLink } from "@/lib/utils/hooks/CreatePaymentLink";
+import { useSendOptApi } from "@/lib/utils/hooks/SendOptApi";
+import { OtpStore } from "@/store/OtpStore";
+import toast from "react-hot-toast";
 
 const CustomStepper = () => {
-
   const router = useRouter();
 
   const { mutate: createPaymentFn, isPending } = useCreatePaymentLink();
+  const { mutateAsync: sendOptApiAsync, isLoading: isPendingOpt } =
+    useSendOptApi();
 
   const methods = useForm<FormValue>({
     resolver: zodResolver(zodSchema),
@@ -40,10 +44,11 @@ const CustomStepper = () => {
     },
   });
 
-  const [activeStep, setActiveStep] = useState(0);
-  const [prevStep, setPrevStep] = useState(0);
-  const [isLastStep, setIsLastStep] = useState(false);
-  const [isFirstStep, setIsFirstStep] = useState(false);
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [prevStep, setPrevStep] = useState<number>(0);
+  const [isLastStep, setIsLastStep] = useState<boolean>(false);
+  const [isFirstStep, setIsFirstStep] = useState<boolean>(false);
+  const [showMoreFields, setShowMoreFields] = useState<boolean>(false);
 
   const direction = activeStep > prevStep ? 1 : -1;
 
@@ -71,7 +76,8 @@ const CustomStepper = () => {
       label: "1",
       components: <PersonalInfo control={methods.control} />,
       description: "Personal Information",
-      fields: ["patientName", "email", "phone_number", "date_of_birth", 'gender'],
+      fields1: ["email", "phone_number"],
+      fields2: ["date_of_birth", "gender", "address"],
     },
     {
       label: "2",
@@ -88,12 +94,43 @@ const CustomStepper = () => {
   ];
 
   const handleNext = async () => {
-    const currentStepFields = steps[activeStep].fields;
-    const valid = await methods.trigger(currentStepFields);
-    if (valid) {
-      setPrevStep(activeStep);
-      setActiveStep((prev) => Math.min(prev + 1, steps.length - 1));
+    if (activeStep === 0 && !showMoreFields) {
+      const validFields = steps[0].fields1;
+      const valid = await methods.trigger(validFields);
+      if (!valid) {
+        return;
+      }
     }
+
+    methods.clearErrors();
+
+    const getEmail = methods.getValues("email");
+
+    try {
+      // api call
+      const res = await sendOptApiAsync({
+        email: getEmail,
+      });
+      const token = res.data.otpToken;
+
+      OtpStore.getState().setOtpSent(token, getEmail, res?.success ?? null);
+      if (!token) {
+        toast.error("Token Is not generated, please try again later.", {
+          toasterId: "area1",
+        });
+      }
+      return;
+    } catch (error) {
+      console.log("Error sending OTP:", error);
+      return;
+    }
+
+    // const currentStepFields = steps[activeStep].fields;
+    // const valid = await methods.trigger(currentStepFields);
+    // if (valid) {
+    //   setPrevStep(activeStep);
+    //   setActiveStep((prev) => Math.min(prev + 1, steps.length - 1));
+    // }
   };
 
   const handlePrev = () => {
@@ -102,31 +139,34 @@ const CustomStepper = () => {
   };
 
   const onSubmit = (data: FieldValues) => {
-
     const amount = Number(data.amount);
 
-    createPaymentFn({ PayAmount: amount }, {
-      onSuccess: (res) => {
+    createPaymentFn(
+      { PayAmount: amount },
+      {
+        onSuccess: (res) => {
+          const tokenUrl = res?.response?.redirectUrl;
+          const merchantOrder = res?.merchantOrderId;
 
-        const tokenUrl = res?.response?.redirectUrl;
-        const merchantOrder = res?.merchantOrderId;
-
-        window.PhonePeCheckout?.transact({
-          tokenUrl: tokenUrl,
-          type: 'IFRAME',
-          callback: (status: string) => {
-            if (status === 'CONCLUDED') {
-              router.replace(`/invoice/${merchantOrder}?userName=${data.patientName}`);
-            } else {
-              console.log("Failed");
-            }
-          }
-        });
-      },
-      onError: (err) => {
-        console.log(err)
+          window.PhonePeCheckout?.transact({
+            tokenUrl: tokenUrl,
+            type: "IFRAME",
+            callback: (status: string) => {
+              if (status === "CONCLUDED") {
+                router.replace(
+                  `/invoice/${merchantOrder}?userName=${data.patientName}`
+                );
+              } else {
+                console.log("Failed");
+              }
+            },
+          });
+        },
+        onError: (err) => {
+          console.log(err);
+        },
       }
-    })
+    );
   };
 
   useEffect(() => {
@@ -215,17 +255,27 @@ const CustomStepper = () => {
               layout
             >
               <GroupAnimationButton
-                text={"Continue"}
+                text={"Verify"}
                 handlePrevorNext={handleNext}
                 Steps={isLastStep}
-                icons={<FaArrowRightLong size={20} color="black" />}
+                icons={
+                  isPendingOpt ? (
+                    <span className="loader"></span>
+                  ) : (
+                    <FaArrowRightLong size={20} color="black" />
+                  )
+                }
                 animatedIcons={<span className="loader"></span>}
-                isPending={isPending}
+                isPending={isPendingOpt}
                 buttonColor={"deep-purple"}
                 buttonVariant={"gradient"}
                 buttonClass="text-center w-full rounded-2xl h-12 relative group overflow-hidden py-3 px-3"
-                childrenClass={"bg-white group-focus:w-[90px] rounded-2xl h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"}
-                textClass={"max-md:group-focus:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:group-hover:translate-x-[-10px] duration-500 delay-200"}
+                childrenClass={
+                  "bg-white group-focus:w-[90px] rounded-2xl h-[2.5rem] w-[14%] flex items-center justify-center absolute right-1 top-[4px] md:group-hover:w-[135px] z-10 duration-500 delay-150 md:right-1 md:w-[10%]"
+                }
+                textClass={
+                  "max-md:group-focus:translate-x-[-10px] !text-[12px] text-white md:text-14 md:block md:group-hover:translate-x-[-10px] duration-500 delay-200"
+                }
               />
             </motion.div>
           </div>
@@ -233,6 +283,6 @@ const CustomStepper = () => {
       </form>
     </FormProvider>
   );
-}
+};
 
 export default CustomStepper;

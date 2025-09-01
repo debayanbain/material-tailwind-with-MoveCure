@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FaRegClock } from "react-icons/fa";
 import { RiMapPinAddFill } from "react-icons/ri";
@@ -6,6 +6,7 @@ import { FaPhoneVolume } from "react-icons/fa6";
 import { IoMdMailUnread } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
+import { Avatar } from "@/lib/MtConfig";
 
 const quickLinks = [
   { name: "Home", href: "#home" },
@@ -33,15 +34,14 @@ const quickLinks = [
 // ];
 
 export default function Footer() {
-
   return (
-    <footer id="contact" className="bg-gray-800 text-white pt-16 pb-8">
+    <footer id="contact" className="bg-gray-800 text-white pt-16 pb-4">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center mb-6">
               <Image
-                src={'/images/Final Logo White.png'}
+                src={"/images/Final Logo White.png"}
                 alt="footer-image"
                 width={1000}
                 height={1000}
@@ -49,7 +49,8 @@ export default function Footer() {
               />
             </div>
             <p className="text-base text-gray-400 mb-6">
-              Your trusted partner in physiotherapy and rehabilitation. We are dedicated to helping you move better and live pain-free.
+              Your trusted partner in physiotherapy and rehabilitation. We are
+              dedicated to helping you move better and live pain-free.
             </p>
             <div className="flex space-x-4">
               {/* {socialLinks.map((link, index) => (
@@ -103,15 +104,21 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <RiMapPinAddFill size={17} className="mt-1 mr-3" />
-                <span className="text-base text-gray-400">Barrackpore BT Road, Kolkata, 700120</span>
+                <span className="text-base text-gray-400">
+                  Barrackpore BT Road, Kolkata, 700120
+                </span>
               </li>
               <li className="flex items-start">
                 <FaPhoneVolume size={17} className="mt-1 mr-3" />
-                <span className="text-base text-gray-400">(+91) 6291064916</span>
+                <span className="text-base text-gray-400">
+                  (+91) 6291064916
+                </span>
               </li>
               <li className="flex items-start">
                 <IoMdMailUnread size={17} className="mt-1 mr-3" />
-                <span className="text-base text-gray-400">movecure51@gmail.com</span>
+                <span className="text-base text-gray-400">
+                  mail@movecure.store
+                </span>
               </li>
               <li className="flex items-start">
                 <FaRegClock size={17} className="mt-1 mr-3" />
@@ -127,23 +134,46 @@ export default function Footer() {
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} MoveCure Physiotherapy. All rights reserved.
+              &copy; {new Date().getFullYear()} MoveCure Physiotherapy. All
+              rights reserved.
             </p>
             <div className="flex space-x-6">
-              <Link href={"/privacy_policy"} className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link
+                href={"/privacy_policy"}
+                className="text-gray-400 hover:text-white text-sm transition-colors"
+              >
                 Privacy Policy
               </Link>
 
-              <Link href={"/refund_policy"} className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link
+                href={"/refund_policy"}
+                className="text-gray-400 hover:text-white text-sm transition-colors"
+              >
                 Refund Policy
               </Link>
 
-              <Link href="/term_condition" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link
+                href="/term_condition"
+                className="text-gray-400 hover:text-white text-sm transition-colors"
+              >
                 Terms of Service
               </Link>
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-full h-7 bg-blue-gray-300/15 p-5 mt-4 flex justify-center items-center gap-1">
+        <p className="text-sm">
+          Made with ❤️ by{" "}
+          <Link
+            target="blank"
+            href={"https://www.linkedin.com/in/debayan-bain/"}
+            className="hover:underline decoration-dashed underline-offset-2"
+          >
+            Debayan Bain
+          </Link>{" "}
+        </p>
+        <Avatar size="xs" src="/images/maharaja.png" />
       </div>
     </footer>
   );

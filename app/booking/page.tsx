@@ -3,6 +3,12 @@ import RegistrationPatient from "@/components/Forms/RegistrationPatient";
 import TextEffect from "@/components/Text-effect";
 import DynamicImage from "@/components/ui/dynamicImageLoading";
 import { Typography } from "@/lib/MtConfig";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Booking Page",
+  description: "Booking or user signin-signup page",
+};
 
 const page = () => {
   return (

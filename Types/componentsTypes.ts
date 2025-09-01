@@ -29,7 +29,9 @@ export type stepsProps = {
     label: string; 
     components?: React.ReactNode; 
     description: string
-    fields: (keyof FormValues)[],
+    fields1?: (keyof FormValues)[],
+    fields2?: (keyof FormValues)[],
+    fields?: (keyof FormValues)[],
  }[]
 
 export interface TextEffectProps {

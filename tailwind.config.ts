@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
-import withMT from "@material-tailwind/react/utils/withMT"
+import withMT from "@material-tailwind/react/utils/withMT";
 import tailwindAnimation from "tailwindcss-animate";
-import { MaxVariantsPlugin } from 'tailwind-max-variants';
+import { MaxVariantsPlugin } from "tailwind-max-variants";
 
 const config: Config = {
   darkMode: ["class"],
@@ -32,7 +32,7 @@ const config: Config = {
         },
         light: {
           200: "#E8E9E9",
-          300: "#f72585"
+          300: "#f72585",
         },
         dark: {
           200: "#0D0F10",
@@ -46,36 +46,40 @@ const config: Config = {
           500: "#FEB008",
         },
         violet: {
-          50: '#6e44ff',
-          100: '#EDE9FE',
-          200: '#DDD6FE',
-          300: '#C4B5FD',
-          400: '#A78BFA',
-          500: '#8B5CF6',
-          600: '#b5179e',
-          700: '#6D28D9',
-          800: '#5B21B6',
-          900: '#4C1D95',
-          950: '#2E1065',
+          50: "#6e44ff",
+          100: "#EDE9FE",
+          200: "#DDD6FE",
+          300: "#C4B5FD",
+          400: "#A78BFA",
+          500: "#8B5CF6",
+          600: "#b5179e",
+          700: "#6D28D9",
+          800: "#5B21B6",
+          900: "#4C1D95",
+          950: "#2E1065",
         },
         purple: {
-          50: '#f6f5fd',
-          100: '#eeedfa',
-          200: '#e1ddf7',
-          300: '#c9c2f0',
-          400: '#ae9ee7',
-          500: '#9177db',
-          600: '#7f59ce',
-          700: '#734cbc',
-          800: '#5d3b9c',
-          900: '#4e3280',
-          950: '#301f56'
+          50: "#f6f5fd",
+          100: "#eeedfa",
+          200: "#e1ddf7",
+          300: "#c9c2f0",
+          400: "#ae9ee7",
+          500: "#9177db",
+          600: "#7f59ce",
+          700: "#734cbc",
+          800: "#5d3b9c",
+          900: "#4e3280",
+          950: "#301f56",
         },
         dark_teal: {
-          800: "#015963"
-        }
+          800: "#015963",
+        },
       },
       keyframes: {
+        "caret-blink": {
+          "0%,70%,100%": { opacity: "1" },
+          "20%,50%": { opacity: "0" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "2" },
@@ -90,29 +94,27 @@ const config: Config = {
             opacity: "0",
           },
         },
-        'tilt-shaking': {
-          '0%': { transform: 'rotate(0deg)' },
-          '25%': { transform: 'rotate(5deg)' },
-          '50%': { transform: 'rotate(0deg)' },
-          '75%': { transform: 'rotate(-5deg)' },
-          '100%': { transform: 'rotate(0deg)' },
+        "tilt-shaking": {
+          "0%": { transform: "rotate(0deg)" },
+          "25%": { transform: "rotate(5deg)" },
+          "50%": { transform: "rotate(0deg)" },
+          "75%": { transform: "rotate(-5deg)" },
+          "100%": { transform: "rotate(0deg)" },
         },
         shimmer: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' },
-        }
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "ping-slow": "ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite",
-        'tilt-shaking': 'tilt-shaking 0.8s ease-in-out infinite',
+        "tilt-shaking": "tilt-shaking 0.8s ease-in-out infinite",
+        "caret-blink": "caret-blink 1.2s ease-out infinite",
       },
     },
   },
-  plugins: [
-    tailwindAnimation,
-    MaxVariantsPlugin
-  ],
-} satisfies Config
+  plugins: [tailwindAnimation, MaxVariantsPlugin],
+} satisfies Config;
 export default withMT(config);
