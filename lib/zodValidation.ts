@@ -8,7 +8,8 @@ export const zodSchema = z.object({
   patientName: z
     .string()
     .min(3, { message: "Name must be at least 3 characters long" })
-    .max(20, { message: "Name does not exist of 20 character long" }),
+    .max(20, { message: "Name does not exist of 20 character long" })
+    .nonempty(),
 
   email: z.string().email({ message: "Invalid email address" }),
   phone_number: z

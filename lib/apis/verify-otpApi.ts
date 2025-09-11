@@ -1,6 +1,8 @@
 import apiClient from "../axiosInstance";
 
 export interface VerifyOtpResponse {
+  success: boolean;
+  message: string;
   data: {
     isUserExist: boolean;
     loginToken: string | null;

@@ -105,6 +105,7 @@ export interface customFormsTypes<T extends FieldValues = FormValue> {
     renderSkeleton?: (field: ControllerRenderProps) => React.ReactNode,
     iconComponents?: React.ReactNode
     showValidIcon?: boolean;
+    iSPhoneInputDisabled?: boolean;
     CustomChipValues?: string
     onChangeChipValues?: (value: string) => void
 }

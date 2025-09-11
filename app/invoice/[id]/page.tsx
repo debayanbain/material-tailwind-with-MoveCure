@@ -9,17 +9,11 @@ import Image from 'next/image';
 import { usePaymentStatusCheck } from '@/lib/utils/hooks/PaymentStatusCheckHooks';
 import { PulseLoader } from 'react-spinners';
 import { currencyFormatter } from '@/lib/utils/helper/currencyFormatter';
-import { Metadata } from 'next';
 
 type paymentStatusTypes = {
   orderId: string;
   paymentDetails: [{ transactionId: string, amount: number | undefined }];
 }
-
-export const metadata: Metadata = {
-  title: "Invoice",
-  description: "Generated invoice for your transaction",
-};
 
 const PaymentSuccess = () => {
   const { id } = useParams() as {id: string};

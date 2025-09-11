@@ -23,7 +23,10 @@ import toast from "react-hot-toast";
 
 const CustomStepper = () => {
   const router = useRouter();
+  const otpSened = OtpStore((s) => s.otpSened);
+  const isOtpVerified = OtpStore((s) => s.isOtpVerified);
 
+  // Api Call
   const { mutate: createPaymentFn, isPending } = useCreatePaymentLink();
   const { mutateAsync: sendOptApiAsync, isLoading: isPendingOpt } =
     useSendOptApi();
@@ -48,7 +51,6 @@ const CustomStepper = () => {
   const [prevStep, setPrevStep] = useState<number>(0);
   const [isLastStep, setIsLastStep] = useState<boolean>(false);
   const [isFirstStep, setIsFirstStep] = useState<boolean>(false);
-  const [showMoreFields, setShowMoreFields] = useState<boolean>(false);
 
   const direction = activeStep > prevStep ? 1 : -1;
 
@@ -77,7 +79,7 @@ const CustomStepper = () => {
       components: <PersonalInfo control={methods.control} />,
       description: "Personal Information",
       fields1: ["email", "phone_number"],
-      fields2: ["date_of_birth", "gender", "address"],
+      fields2: ["patientName", "date_of_birth", "gender", "address"],
     },
     {
       label: "2",
@@ -93,44 +95,84 @@ const CustomStepper = () => {
     },
   ];
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (methods.formState.isDirty && activeStep === activeStep) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [activeStep, methods.formState.isDirty]);
+
   const handleNext = async () => {
-    if (activeStep === 0 && !showMoreFields) {
+    if (activeStep === 0 && !otpSened && !isOtpVerified) {
       const validFields = steps[0].fields1;
       const valid = await methods.trigger(validFields);
       if (!valid) {
         return;
       }
-    }
 
-    methods.clearErrors();
+      methods.clearErrors();
 
-    const getEmail = methods.getValues("email");
+      const getEmail = methods.getValues("email");
 
-    try {
-      // api call
-      const res = await sendOptApiAsync({
-        email: getEmail,
-      });
-      const token = res.data.otpToken;
+      try {
+        // api call
+        const res = await sendOptApiAsync({
+          email: getEmail,
+        });
+        const token = res.data.otpToken;
 
-      OtpStore.getState().setOtpSent(token, getEmail, res?.success ?? null);
-      if (!token) {
-        toast.error("Token Is not generated, please try again later.", {
+        OtpStore.getState().setOtpSent(token, getEmail, res?.success ?? null);
+        if (!token) {
+          toast.error("Token Is not generated, please try again later.", {
+            toasterId: "area1",
+          });
+        }
+        return;
+      } catch (error) {
+        console.log("Error sending OTP:", error);
+        toast.error("Error sending OTP, please try later.", {
           toasterId: "area1",
         });
+        return;
       }
-      return;
-    } catch (error) {
-      console.log("Error sending OTP:", error);
-      return;
     }
 
-    // const currentStepFields = steps[activeStep].fields;
-    // const valid = await methods.trigger(currentStepFields);
-    // if (valid) {
-    //   setPrevStep(activeStep);
-    //   setActiveStep((prev) => Math.min(prev + 1, steps.length - 1));
-    // }
+    if (activeStep === 0 && (otpSened || isOtpVerified)) {
+      const validFields = steps[0].fields2;
+      const valid = await methods.trigger(validFields);
+      if (!valid) {
+        return;
+      }
+
+      methods.clearErrors();
+
+      try {
+        // const {
+        //   patientName,
+        //   phone_number,
+        //   email,
+        //   date_of_birth,
+        //   gender,
+        //   address,
+        // } = methods.getValues();
+
+        
+      } catch (error) {
+        console.log("Error verifying OTP:", error);
+        toast.error("Error verifying OTP, please try later.", {
+          toasterId: "area1",
+        });
+        return;
+      }
+    }
   };
 
   const handlePrev = () => {

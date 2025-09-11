@@ -8,6 +8,7 @@ import Footer from "@/components/footer";
 import { Providers } from "@/app/provider";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
+// import IntialModal from "@/components/intialModal";
 
 export const metadata: Metadata = {
   icons: "/favicon.ico",
@@ -25,6 +26,7 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head />
         <body>
+          {/* <IntialModal /> */}
           <Providers>
             <ThemeProvider
               attribute="class"

@@ -198,6 +198,15 @@ html {
   font-weight: 600;
 }
 
+:disabled {
+  background-color: #F0F0F0 !important;
+  cursor: not-allowed;
+}
+.disabled {
+  background-color: #F0F0F0 !important;
+  cursor: not-allowed;
+}
+
 .dark .PhoneInputInput {
   color: #ffffff !important;
 }

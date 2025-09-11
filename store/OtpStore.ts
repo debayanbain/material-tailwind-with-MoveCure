@@ -2,15 +2,18 @@
 import { create } from "zustand";
 
 type OtpStoreType = {
-    isOtpModalOpen: boolean;
-    otpToken: string | null;
-    email: string | null;
-    otpSened: boolean;
-    setOtpSent: (token: string, email?: string, otpSened?: boolean) => void;
-    closeOtpModal: () => void;
-}
+  isOtpVerified: boolean;
+  isOtpModalOpen: boolean;
+  otpToken: string | null;
+  email: string | null;
+  otpSened: boolean;
+  setOtpSent: (token: string, email?: string, otpSened?: boolean) => void;
+  setOtpVerified: (isVerified: boolean) => void;
+  closeOtpModal: () => void;
+};
 
 export const OtpStore = create<OtpStoreType>((set) => ({
+  isOtpVerified: false,
   isOtpModalOpen: false,
   otpSened: false,
   otpToken: null,
@@ -22,6 +25,15 @@ export const OtpStore = create<OtpStoreType>((set) => ({
       otpToken: token ?? null,
       email: email ?? null,
     }),
+  setOtpVerified: (isVerified: boolean) =>
+    set({
+      isOtpVerified: isVerified,
+    }),
   closeOtpModal: () =>
-    set({ isOtpModalOpen: false, otpToken: null, email: null, otpSened: false }),
+    set({
+      isOtpModalOpen: false,
+      otpToken: null,
+      email: null,
+      otpSened: false,
+    }),
 }));

@@ -1,12 +1,18 @@
+"use client";
+
 import { CustomFormFields } from "@/components/customForms";
 import React from "react";
 import { FromFiledTypes } from "@/Types/componentsTypes";
 import { customFormsTypes } from "@/Types/componentsTypes";
 import { FormValue } from "@/lib/zodValidation";
 import OtpModals from "@/components/Modals/otp_modals";
+import { userOnbording } from "@/store/userRelated";
+import { OtpStore } from "@/store/OtpStore";
 
-const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
-  const showOtherMenu = false;
+const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({control}) => {
+  const showOtherMenu = userOnbording((s) => s.userExist);
+  const disableFields = userOnbording((s) => s.disableTwoFields);
+  const isOtpVerified = OtpStore((s) => s.isOtpVerified);
 
   return (
     <>
@@ -18,13 +24,8 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
           name="email"
           lable="Enter Valid Email"
           placeholder="eg. john@example.com"
+          disabled={disableFields}
         />
-
-        {/* <div className="flex justify-between items-center font-bold text-blue-gray-500/30">
-          <div className="w-1 h-[2px] bg-blue-gray-300 flex-grow rounded-md mx-5 opacity-30"></div>
-          Or
-          <div className="w-1 h-[2px] bg-blue-gray-300 flex-grow rounded-md mx-5 opacity-30"></div>
-        </div> */}
 
         <CustomFormFields
           control={control}
@@ -32,7 +33,8 @@ const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
           name="phone_number"
           lable="Enter Phone Number"
           placeholder="eg. +91 **********"
-          showValidIcon={true}
+          showValidIcon={isOtpVerified}
+          iSPhoneInputDisabled={disableFields}
         />
 
         {showOtherMenu && (
