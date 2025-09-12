@@ -14,12 +14,24 @@ import { create } from "zustand";
 interface UserOnbordingType {
   userExist: boolean;
   disableTwoFields: boolean;
-  setShowOtherFields: (checkExisted: boolean, disableTwoField?: boolean) => void;
+  token: string | null;
+  setShowOtherFields: (
+    checkExisted: boolean,
+    disableTwoField?: boolean
+  ) => void;
+  setTokenToLocalStorage: (token: string) => void;
 }
 
 export const userOnbording = create<UserOnbordingType>((set) => ({
   userExist: false,
   disableTwoFields: false,
+  token: localStorage.getItem("token") || null,
+  setTokenToLocalStorage: (token: string) => {
+    localStorage.setItem("token", token);
+    set({
+      token,
+    });
+  },
   setShowOtherFields: (checkExisted: boolean, disableTwoField?: boolean) =>
     set({
       userExist: !checkExisted,

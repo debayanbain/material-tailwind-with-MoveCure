@@ -307,7 +307,6 @@ export const CustomFormFields = <T extends FieldValues>(
                 ...props,
                 onChangeChipValues: (value: string) => {
                   if (!CustomChipValues) {
-                    console.log(value);
                     setChipValues(`${value} years`);
                   } else {
                     setChipValues(CustomChipValues);

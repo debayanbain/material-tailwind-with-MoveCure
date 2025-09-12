@@ -20,6 +20,9 @@ import { useCreatePaymentLink } from "@/lib/utils/hooks/CreatePaymentLink";
 import { useSendOptApi } from "@/lib/utils/hooks/SendOptApi";
 import { OtpStore } from "@/store/OtpStore";
 import toast from "react-hot-toast";
+import { useRegisteredApi } from "@/lib/utils/hooks/RegisteredAPI";
+import { RegisterPayload } from "@/lib/apis/registared";
+import { userOnbording } from "@/store/userRelated";
 
 const CustomStepper = () => {
   const router = useRouter();
@@ -31,6 +34,8 @@ const CustomStepper = () => {
   const { mutateAsync: sendOptApiAsync, isLoading: isPendingOpt } =
     useSendOptApi();
 
+  const { mutateAsync: registeredApi, isLoading } = useRegisteredApi();
+
   const methods = useForm<FormValue>({
     resolver: zodResolver(zodSchema),
     mode: "onBlur",
@@ -38,6 +43,7 @@ const CustomStepper = () => {
       patientName: "",
       email: "",
       phone_number: "",
+      age: "",
       blood_group: "",
       address: "",
       allergies: "",
@@ -79,7 +85,7 @@ const CustomStepper = () => {
       components: <PersonalInfo control={methods.control} />,
       description: "Personal Information",
       fields1: ["email", "phone_number"],
-      fields2: ["patientName", "date_of_birth", "gender", "address"],
+      fields2: ["patientName", "date_of_birth", "gender", "address", "age"],
     },
     {
       label: "2",
@@ -155,19 +161,39 @@ const CustomStepper = () => {
       methods.clearErrors();
 
       try {
-        // const {
-        //   patientName,
-        //   phone_number,
-        //   email,
-        //   date_of_birth,
-        //   gender,
-        //   address,
-        // } = methods.getValues();
+        const {
+          patientName,
+          phone_number,
+          email,
+          date_of_birth,
+          gender,
+          address,
+          age,
+        } = methods.getValues();
 
+        const payload: RegisterPayload = {
+          full_name: patientName,
+          email,
+          phone_number,
+          dob: date_of_birth,
+          gender: gender?.toLocaleLowerCase(),
+          address,
+          age: age?.toString() ?? "",
+          isEmailVerify: isOtpVerified,
+          isPhoneVerify: isOtpVerified,
+        };
+        console.log(payload, "from data");
         
+        const res = await registeredApi(payload);
+        if (res?.success) {
+          toast.success("User Registered Successfully!", {
+            toasterId: "area1",
+          });
+        }
+        userOnbording.getState().setTokenToLocalStorage(res?.data?.token);
       } catch (error) {
-        console.log("Error verifying OTP:", error);
-        toast.error("Error verifying OTP, please try later.", {
+        console.log("Error while Registering User", error);
+        toast.error((error as { data: { message: string } }).data?.message || "Error while Registering User", {
           toasterId: "area1",
         });
         return;
@@ -301,14 +327,14 @@ const CustomStepper = () => {
                 handlePrevorNext={handleNext}
                 Steps={isLastStep}
                 icons={
-                  isPendingOpt ? (
+                  isPendingOpt || isLoading ? (
                     <span className="loader"></span>
                   ) : (
                     <FaArrowRightLong size={20} color="black" />
                   )
                 }
                 animatedIcons={<span className="loader"></span>}
-                isPending={isPendingOpt}
+                isPending={isPendingOpt || isLoading}
                 buttonColor={"deep-purple"}
                 buttonVariant={"gradient"}
                 buttonClass="text-center w-full rounded-2xl h-12 relative group overflow-hidden py-3 px-3"

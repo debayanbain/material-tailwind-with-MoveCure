@@ -16,6 +16,7 @@ type FormValues = {
     phone_number: string;
     date_of_birth: Date | null | undefined;
     gender: genderTypes;
+    age: string;
     address: string;
     blood_group: string;
     allergies: string;

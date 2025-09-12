@@ -37,13 +37,9 @@ export const zodSchema = z.object({
     .max(20, { message: "Allergies does not exist of 20 character long" })
     .nonempty({ message: "Allergies cannot be empty" }),
   problems: z.string().nonempty({ message: "problems cannot be empty" }),
-
   file_upload: z.array(z.instanceof(File)).optional(),
-
-  // plan: z.string().optional(),
-  // paymentMethod: z.string().optional(),
-
   amount: z.number().min(100, { message: "Amount must be at least 100" }),
+  age: z.string().optional(),
 });
 
 export type FormValue = z.infer<typeof zodSchema>;
