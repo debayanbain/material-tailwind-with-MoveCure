@@ -182,15 +182,14 @@ const CustomStepper = () => {
           isEmailVerify: isOtpVerified,
           isPhoneVerify: isOtpVerified,
         };
-        console.log(payload, "from data");
-        
+
         const res = await registeredApi(payload);
         if (res?.success) {
           toast.success("User Registered Successfully!", {
             toasterId: "area1",
           });
         }
-        userOnbording.getState().setTokenToLocalStorage(res?.data?.token);
+        userOnbording.getState().setToken(res?.data?.token);
       } catch (error) {
         console.log("Error while Registering User", error);
         toast.error((error as { data: { message: string } }).data?.message || "Error while Registering User", {

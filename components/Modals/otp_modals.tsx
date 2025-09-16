@@ -17,7 +17,7 @@ import Countdown, { CountdownApi } from "react-countdown";
 import { userOnbording } from "@/store/userRelated";
 
 const TOAST_ID = "TOAST1";
-const COUNT_TIME = 12000; // 2 minutes in milliseconds
+const COUNT_TIME = 120000; // 2 minutes in milliseconds
 
 const OptModals = () => {
   const maxLength = 6 as const;
@@ -29,15 +29,11 @@ const OptModals = () => {
   // States
   const [isError, setIsError] = useState<boolean>(false);
   const [otpValues, setotpValues] = useState<string>("");
+  const [endTime, setEndTime] = useState<number | null>(null);
   //for countdown ref
   const countdownApiRef = React.useRef<CountdownApi | null>(null);
   //api called
   const { mutateAsync: setVerifyOtp, isLoading } = useVerifyOtpApi();
-
-  const handleClose = () => {
-    setIsError(false);
-    closeOtpModal();
-  };
 
   const setRef = useCallback((countdown: Countdown | null) => {
     if (countdown) {
@@ -50,6 +46,8 @@ const OptModals = () => {
   useEffect(() => {
     let timmer: NodeJS.Timeout;
     if (isOpen && otpSended) {
+      const newEndTime = Date.now() + COUNT_TIME;
+      setEndTime(newEndTime);
       countdownApiRef.current?.start();
       timmer = setTimeout(() => {
         toast.success("OTP Sent Successfully!", {
@@ -81,9 +79,11 @@ const OptModals = () => {
       if (res?.success) {
         userOnbording.getState().setShowOtherFields(res?.data?.isUserExist ?? false, res?.success ?? false);
         OtpStore.getState().setOtpVerified(res?.success ?? false);
+        userOnbording.getState().setToken(res?.data?.loginToken ?? null);
         toast.success("OTP Verified Successfully!", {
           toasterId: 'area1',
         });
+        countdownApiRef.current?.stop();
         closeOtpModal();
       }
     } catch (error: unknown) {
@@ -94,6 +94,12 @@ const OptModals = () => {
       });
       return;
     }
+  };
+
+  const handleClose = () => {
+    setIsError(false);
+    countdownApiRef.current?.stop();
+    closeOtpModal();
   };
 
   return (
@@ -113,28 +119,27 @@ const OptModals = () => {
       >
         <Toaster
           toasterId={TOAST_ID}
-          position="bottom-center"
+          position="top-center"
           reverseOrder={false}
           toastOptions={{ duration: 5000 }}
         />
         <DialogHeader className="justify-center">
           <BlurTextAnimation>Verify OTP</BlurTextAnimation>
         </DialogHeader>
-        <Countdown
-          date={Date.now() + COUNT_TIME}
-          intervalDelay={0}
-          precision={3}
-          daysInHours={true}
-          autoStart={false}
-          ref={setRef}
-          className="mb-2 text-red-500 flex justify-center items-center font-bold text-xl"
-        >
-          <BlurTextAnimation className="flex justify-center items-center">
+        {endTime && (
+          <Countdown
+            date={endTime}
+            intervalDelay={0}
+            precision={3}
+            daysInHours={true}
+            ref={setRef}
+            className="mb-2 text-red-500 flex justify-center items-center font-bold text-xl"
+          >
             <p className="text-center text-base font-semibold text-red-400">
               OTP Has Been Expired...
             </p>
-          </BlurTextAnimation>
-        </Countdown>
+          </Countdown>
+        )}
         <div>
           <BlurTextAnimation className="text-center">
             Please enter the OTP sent to your email.
