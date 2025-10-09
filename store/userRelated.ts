@@ -2,32 +2,32 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface UserOnbordingType {
-  userExist: boolean;
+  showOtherMenu: boolean;
   disableTwoFields: boolean;
   token: string | null;
-  setShowOtherFields: (
-    checkExisted: boolean,
-    disableTwoField?: boolean
-  ) => void;
+  setTwoOtherFields: (disableTwoField?: boolean) => void;
+  setShowOtherMenu: (checkExisted?: boolean) => void;
   setToken: (token: string | null) => void;
+  logOut: () => void;
 }
 
 export const userOnbording = create<UserOnbordingType>()(
   persist(
     (set) => ({
-      userExist: false,
-      disableTwoFields: false,
       token: null,
+      showOtherMenu: false,
+      disableTwoFields: false,
 
       setToken: (token) => set({ token }),
 
-      logOut: () => set({ token: null }), 
+      logOut: () => set({ token: null }),
 
-      setShowOtherFields: (checkExisted, disableTwoField) =>
+      setTwoOtherFields: (disableTwoField) =>
         set({
-          userExist: !checkExisted,
           disableTwoFields: disableTwoField ?? false,
         }),
+      setShowOtherMenu: (checkExisted) =>
+        set({ showOtherMenu: checkExisted ?? false }),
     }),
     {
       name: "user-onboarding", // 👈 key for localStorage

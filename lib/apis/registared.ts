@@ -15,7 +15,6 @@ export interface RegisterPayload {
   dob: string | Date;
   gender: string;
   address: string;
-  age: string;
   isEmailVerify: boolean;
   isPhoneVerify: boolean;
 }

@@ -168,7 +168,6 @@ const CustomStepper = () => {
           date_of_birth,
           gender,
           address,
-          age,
         } = methods.getValues();
 
         const payload: RegisterPayload = {
@@ -178,7 +177,6 @@ const CustomStepper = () => {
           dob: date_of_birth,
           gender: gender?.toLocaleLowerCase(),
           address,
-          age: age?.toString() ?? "",
           isEmailVerify: isOtpVerified,
           isPhoneVerify: isOtpVerified,
         };
@@ -190,6 +188,8 @@ const CustomStepper = () => {
           });
         }
         userOnbording.getState().setToken(res?.data?.token);
+        userOnbording.getState().setShowOtherMenu(false);
+        return;
       } catch (error) {
         console.log("Error while Registering User", error);
         toast.error((error as { data: { message: string } }).data?.message || "Error while Registering User", {

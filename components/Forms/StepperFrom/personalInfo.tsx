@@ -8,19 +8,27 @@ import { FormValue } from "@/lib/zodValidation";
 import OtpModals from "@/components/Modals/otp_modals";
 import { userOnbording } from "@/store/userRelated";
 import { OtpStore } from "@/store/OtpStore";
-import { Button } from "@/lib/MtConfig";
+import { Button, Alert } from "@/lib/MtConfig";
+import { useCheckToken } from "@/lib/apis/tokenCheck";
+import { LuBadgeAlert } from "react-icons/lu";
+import { IoClose } from "react-icons/io5";
 
 const PersonalInfo: React.FC<customFormsTypes<FormValue>> = ({ control }) => {
-  const showOtherMenu = userOnbording((s) => s.userExist);
+  const showOtherMenu = userOnbording((s) => s.showOtherMenu);
   const disableFields = userOnbording((s) => s.disableTwoFields);
   const isUserExist = userOnbording((s) => s.token);
   const isOtpVerified = OtpStore((s) => s.isOtpVerified);
+  const token = userOnbording((s) => s.token);
+
+  const { data, isError } = useCheckToken();
+  const isLogging = Boolean(token && data?.valid);
+
 
   return (
     <>
       <div className="mb-1 flex flex-col gap-2 relative">
         {
-          isUserExist && (
+          isLogging && (
             <div
               className="absolute w-full h-full rounded-lg z-40 flex justify-center items-center"
               style={{

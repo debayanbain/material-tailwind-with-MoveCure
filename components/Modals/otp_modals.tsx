@@ -77,7 +77,9 @@ const OptModals = () => {
       });
 
       if (res?.success) {
-        userOnbording.getState().setShowOtherFields(res?.data?.isUserExist ?? false, res?.success ?? false);
+        console.log(res?.data?.isUserExist, "isUserExist");
+        userOnbording.getState().setTwoOtherFields(res?.success ?? false);
+        userOnbording.getState().setShowOtherMenu(!res?.data?.isUserExist ? true : false);
         OtpStore.getState().setOtpVerified(res?.success ?? false);
         userOnbording.getState().setToken(res?.data?.loginToken ?? null);
         toast.success("OTP Verified Successfully!", {
