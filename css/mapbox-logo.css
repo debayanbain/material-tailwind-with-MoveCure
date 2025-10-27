@@ -1,0 +1,5 @@
+.mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib,
+.mapbox-improve-map {
+  display: none !important;
+}

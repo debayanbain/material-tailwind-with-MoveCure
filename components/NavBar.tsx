@@ -1,9 +1,79 @@
 "use client";
 
 import React from "react";
-import { Navbar, Tooltip, Typography, Chip, Button } from "@/lib/MtConfig";
+import { Navbar, Tooltip, Typography, Chip, Button, Menu, MenuHandler, Avatar, MenuList, MenuItem } from "@/lib/MtConfig";
 import Image from "next/image";
 import Link from "next/link";
+import { FaUser } from "react-icons/fa";
+import { IoMdHelpCircle } from "react-icons/io";
+import { FaSignOutAlt } from "react-icons/fa";
+
+const profileMenuItems = [
+  {
+    label: "My Profile",
+    icon: <FaUser />,
+  },
+  {
+    label: "Help",
+    icon: <IoMdHelpCircle size={17} />,
+  },
+  {
+    label: "Sign Out",
+    icon: <FaSignOutAlt />,
+  },
+];
+
+const AvatarWithUserDropdown = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
+  return (
+    <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="left-end">
+      <MenuHandler>
+        <Button
+          variant="text"
+          color="blue-gray"
+          className="flex items-center rounded-full p-0 focus:outline-none focus:ring-0"
+        >
+          <Avatar
+            variant="circular"
+            size="sm"
+            alt="tania andrew"
+            withBorder={true}
+            className=" p-0.5 border-white focus:outline-none focus:ring-0"
+            src="https://docs.material-tailwind.com/img/face-2.jpg"
+          />
+        </Button>
+      </MenuHandler>
+      <MenuList className="p-1 z-[9999]">
+        {profileMenuItems.map(({ label, icon }, key) => {
+          const isLastItem = key === profileMenuItems.length - 1;
+          return (
+            <MenuItem
+              key={label}
+              onClick={closeMenu}
+              className={`flex items-center gap-2 rounded ${isLastItem
+                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                : ""
+                }`}
+            >
+              {icon}
+              <Typography
+                as="span"
+                variant="small"
+                className="font-normal"
+                color={isLastItem ? "red" : "inherit"}
+              >
+                {label}
+              </Typography>
+            </MenuItem>
+          );
+        })}
+      </MenuList>
+    </Menu>
+  );
+}
 
 function NavList() {
   return (
@@ -36,6 +106,16 @@ function NavList() {
       >
         <Link href="#therapists" className="flex items-center text-white hover:text-blue-500 transition-colors">
           Our Team
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <Link href="#therapists" className="flex items-center text-white hover:text-blue-500 transition-colors">
+          Contact Us
         </Link>
       </Typography>
     </ul>
@@ -86,12 +166,14 @@ const NavBar = () => {
             <NavList />
           </div>
 
-          <div className="flex gap-1 md:mr-4">
-            <Button variant="filled" className="bg-white text-primary hover:bg-gray-100" size="sm">
-              Contact Us
-            </Button>
+          <div className="flex items-center justify-between gap-1">
+            <div className="flex">
+              <AvatarWithUserDropdown />
+            </div>
           </div>
+
         </div>
+
       </Navbar>
     </>
   );

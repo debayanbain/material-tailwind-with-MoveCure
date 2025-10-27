@@ -5,6 +5,7 @@ import Map, { Marker, Source, Layer } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Card, Typography, Button, Input } from "@/lib/MtConfig";
 import { FaSearchLocation } from "react-icons/fa";
+import '@/css/mapbox-logo.css';
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_API_MAPBOX_TOKEN as string;
 
@@ -19,9 +20,11 @@ const MapboxExample = () => {
                     zoom: 10,
                 }}
                 minZoom={4}
-                style={{ width: '100%', height: 400, borderRadius: '12px' }}
+                style={{ width: '100%', height: '450px', borderRadius: '0px' }}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 mapboxAccessToken={MAPBOX_TOKEN}
+                reuseMaps={true}
+                attributionControl={false}
             >,
             </Map>
 
