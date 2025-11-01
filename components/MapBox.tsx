@@ -9,6 +9,22 @@ import '@/css/mapbox-logo.css';
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_API_MAPBOX_TOKEN as string;
 
+const clicnicLocation = [
+    {
+        id: 1,
+        name: "MoveCure Clinic",
+        latitude: 22.753432887959868,
+        longitude: 88.36933204059154,
+        zoom: 10
+    },
+    {
+        id: 2,
+        name: "MoveCure Clinic",
+        latitude: 22.445911259974693,
+        longitude: 88.39783905165767,
+        zoom: 14
+    }
+];
 
 const MapboxExample = () => {
     return (
@@ -17,15 +33,18 @@ const MapboxExample = () => {
                 initialViewState={{
                     latitude: 22.590354609780633,
                     longitude: 88.36641341226412,
-                    zoom: 10,
+                    zoom: 9,
                 }}
                 minZoom={4}
                 style={{ width: '100%', height: '450px', borderRadius: '0px' }}
-                mapStyle="mapbox://styles/mapbox/streets-v11"
+                mapStyle="mapbox://styles/mapbox/satellite-streets-v12"
                 mapboxAccessToken={MAPBOX_TOKEN}
                 reuseMaps={true}
                 attributionControl={false}
             >,
+                {clicnicLocation.map((clinic) => (
+                    <Marker latitude={clinic.latitude} longitude={clinic.longitude} key={clinic.id} anchor="bottom" />
+                ))}
             </Map>
 
             <div className="absolute top-2 right-4 bg-white shadow-md rounded-lg w-72">

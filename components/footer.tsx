@@ -1,6 +1,6 @@
 "use client";
 
-import { FaRegClock } from "react-icons/fa";
+import { FaFacebook, FaRegClock, FaTwitter } from "react-icons/fa";
 import { RiMapPinAddFill } from "react-icons/ri";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoMdMailUnread } from "react-icons/io";
@@ -18,20 +18,20 @@ const quickLinks = [
   // { name: "FAQs", href: "#" }
 ];
 
-// const serviceLinks = [
-//   { name: "Sports Rehabilitation", href: "#" },
-//   { name: "Manual Therapy", href: "#" },
-//   { name: "Neurological Rehabilitation", href: "#" },
-//   { name: "Pediatric Therapy", href: "#" },
-//   { name: "Pain Management", href: "#" },
-//   { name: "Geriatric Physiotherapy", href: "#" },
-//   { name: "Workplace Injuries", href: "#" }
-// ];
+const serviceLinks = [
+  { name: "Sports Rehabilitation", href: "#" },
+  { name: "Manual Therapy", href: "#" },
+  { name: "Neurological Rehabilitation", href: "#" },
+  { name: "Pediatric Therapy", href: "#" },
+  { name: "Pain Management", href: "#" },
+  { name: "Geriatric Physiotherapy", href: "#" },
+  { name: "Workplace Injuries", href: "#" }
+];
 
-// const socialLinks = [
-//   { icon: <FaFacebook size={25} />, href: "#", label: "Facebook" },
-//   { icon: <FaTwitter size={25} />, href: "#", label: "Twitter" },
-// ];
+const socialLinks = [
+  { icon: <FaFacebook size={25} />, href: "#", label: "Facebook" },
+  { icon: <FaTwitter size={25} />, href: "#", label: "Twitter" },
+];
 
 export default function Footer() {
   return (
@@ -53,7 +53,7 @@ export default function Footer() {
               dedicated to helping you move better and live pain-free.
             </p>
             <div className="flex space-x-4">
-              {/* {socialLinks.map((link, index) => (
+              {socialLinks.map((link, index) => (
                 <Link
                   key={index}
                   href={link.href}
@@ -63,7 +63,7 @@ export default function Footer() {
                 >
                   {link.icon}
                 </Link>
-              ))} */}
+              ))}
             </div>
           </div>
 
@@ -83,7 +83,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* <div>
+          <div>
             <h4 className="text-lg font-bold mb-6">Services</h4>
             <ul className="space-y-3">
               {serviceLinks.map((link, index) => (
@@ -97,7 +97,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div> */}
+          </div>
 
           <div>
             <h4 className="text-lg font-bold mb-6">Contact Us</h4>
@@ -162,7 +162,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-full h-7 bg-blue-gray-300/15 p-5 mt-4 flex justify-center items-center gap-1">
+      {/* <div className="w-full h-7 bg-blue-gray-300/15 p-5 mt-4 flex justify-center items-center gap-1">
         <p className="text-sm">
           Made with ❤️ by{" "}
           <Link
@@ -174,7 +174,7 @@ export default function Footer() {
           </Link>{" "}
         </p>
         <Avatar size="xs" src="/images/maharaja.png" />
-      </div>
+      </div> */}
     </footer>
   );
 }

@@ -8,6 +8,7 @@ import Footer from "@/components/footer";
 import { Providers } from "@/app/provider";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
+import { Clarity } from "@/Clarity";
 // import IntialModal from "@/components/intialModal";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
         <head />
         <body>
           {/* <IntialModal /> */}
+          <Clarity />
           <Providers>
             <ThemeProvider
               attribute="class"
